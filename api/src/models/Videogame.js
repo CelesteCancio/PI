@@ -8,5 +8,25 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    id: {
+      type: DataTypes.UUID,
+      //allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    released: {
+      type: DataTypes.DATEONLY
+    },
+    rating: {
+      type: DataTypes.FLOAT
+    },
+    platforms: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    }
   });
 };
