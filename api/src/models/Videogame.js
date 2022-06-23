@@ -9,8 +9,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     id: {
-      type: DataTypes.UUID,
-      //allowNull: false,
+      type: DataTypes.UUID, 
+      allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
@@ -28,5 +28,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false
     }
+  },
+  {
+    timestamps: true,
+    createdAt: false,
+    updatedAt: "Last update"
   });
 };
