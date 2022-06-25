@@ -2,9 +2,14 @@ const {Videogame} = require ('../db');
 
 async function addVideogame (videogame){
     const genresId = videogame.genresId; //tiene q ser un arreglo y llamarse igual en el envio de info desde front
-    const newVideogame = await Videogame.create({...videogame});
-    await newVideogame.addGenre (genresId);    
-    return newVideogame;
+    try {
+        const newVideogame = await Videogame.create({...videogame});
+        await newVideogame.addGenre (genresId);    
+        return newVideogame;
+    } catch (error) {
+        throw new Error (`No se pudo agregar el videojuego la base de datos, ${error}`);
+    }
+
 }
 
 function getVideogames (){
