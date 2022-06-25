@@ -22,7 +22,6 @@ router.post('/', async (req,res) => {
 
     try {
         const addedVideogame = await addVideogame({...req.body});
-        //return res.send(`Estas en un POST de videogames/ y se acaba de llamar la funcion ${fc}`);
         return res.json(addedVideogame);
     } catch (error) {
         return res.send(error);
