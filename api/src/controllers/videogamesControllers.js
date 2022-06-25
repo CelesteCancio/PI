@@ -1,10 +1,10 @@
 const {Videogame} = require ('../db');
 
 async function addVideogame (videogame){
+    const genresId = videogame.genresId; //tiene q ser un arreglo y llamarse igual en el envio de info desde front
     const newVideogame = await Videogame.create({...videogame});
-    //return `addVideogame, y... buenas noticias: Videojuego agregado con los siguientes datos: ${newVideogame}`; 
+    await newVideogame.addGenre (genresId);    
     return newVideogame;
-    // Quiero ver si puedo acceder y devolver el UUID
 }
 
 function getVideogames (){
