@@ -1,22 +1,45 @@
 const {Router} = require ("express");
-const {addVideogame, getVideogames, getVideogamesByName} = require ("../controllers/videogamesControllers");
+const {getVideogameById, getVideogames, addVideogame} = require ("../controllers/videogamesControllers");
 
 
 const router = Router();
 
-router.get('/', (req,res) => {
-    const {name} = req.query;
+router.get('/:id', (req,res) => {
+
+    const id = req.params.id;  
+    console.log(`estas en ruta get videogames/id, el id ingresado es ${id}`);  
+
     try {
-        if(name){            
-            const fc = getVideogamesByName(name);
-            return res.send(`Estas en un GET de videogames/, mandaste por query el nombre ${name} y se acaba de llamar la funcion ${fc}`);
-        }
-        const fc = getVideogames();
-        return res.send(`Estas en un GET de videogames/ y se acaba de llamar la funcion ${fc}`);
+        getVideogameById(id).then(videogame => res.json(videogame));
     } catch (error) {
         return res.send(error);
     }
 });
+
+router.get('/', (req,res) => {
+    const {search} = req.query;
+    console.log(`search: ${search}`);
+    // try {
+    //     if(search){            
+    //         const fc = getVideogamesByName(search);
+    //         return res.send(`Estas en un GET de videogames/, mandaste por query el search ${search} y se acaba de llamar la funcion ${fc}`);
+    //     }
+    //     const fc = getVideogamesFromAPI();
+    //     // const videogames = getVideogamesFromAPI();
+    //     // return res.json(videogames);
+    //     return res.send(`Estas en un GET de videogames/ y se acaba de llamar la funcion ${fc}`);
+    // } catch (error) {
+    //     return res.send(error);
+    // }
+
+    try {
+        getVideogames(search).then(videogames => res.json(videogames));
+    } catch (error) {
+        return res.send(error);
+    }
+});
+
+
 
 router.post('/', async (req,res) => {
 
