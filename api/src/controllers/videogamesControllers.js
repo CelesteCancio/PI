@@ -1,4 +1,4 @@
-const {Videogame} = require ('../db');
+const {Videogame, Genre} = require ('../db');
 const axios = require ('axios');
 const {
     API_KEY,
@@ -48,7 +48,9 @@ async function getVideogameByIdFromAPI (id){
 //anda OK, solo falta q traiga unicamente los datos q necesito para el front
 async function getVideogameByIdFromDB (id){
     try {
-        const foundVideogame = await Videogame.findByPk(id);
+        const foundVideogame = await Videogame.findByPk(id,{
+            include: Genre
+        });
         return foundVideogame;
     } catch (error) {
         throw new Error (`No se pudo encontrar el videojuego en la base de datos, ${error}`);
@@ -62,14 +64,21 @@ function getVideogames (name){
         console.log(getVideogamesByName (name));
     }
     else{
-        console.log(getAllVideogames ());
+        return getAllVideogames ();
     }
 }
 
-function getAllVideogames (){
-    getAllVideogamesFromAPI ();
-    getAllVideogamesFromDB ()
-    return `Soy getAllVideogames`;
+//ESTA OK:
+async function getAllVideogames (){
+    try {
+        const allVideogamesFromAPI = await getAllVideogamesFromAPI ();
+        const allVideogamesFromDB = await getAllVideogamesFromDB ();
+
+        const allVideogames = [...allVideogamesFromDB, ...allVideogamesFromAPI];
+        return allVideogames;
+    } catch (error) {
+        throw new Error (`No se pudieron cargar todos los videojuegos, ${error}`);
+    }
 }
 
 function getVideogamesByName (name){
@@ -87,22 +96,44 @@ function getVideogamesByNameFromDB (name){
     
 }
 
+//ESTA OK, pero falta q traiga solo 100 juegos
 async function getAllVideogamesFromAPI (){
     try {
-    //     fetch.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
-    //     .then(response => response.json())
-    //     .then(game => {game.results.name, game.results.id, game.results.genres, game.results["background_image"], game.results.rating});
-        let videogames = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results 
+        //ASI NO:
+        // let videogames = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+        // .then(response => response.data.map (videogame => ({
+        //    name: videogame.name,             
+        //     image: videogame["background_image"],
+        //     genres: videogame.genres.map (genre => genre.name)
+        // })))
+                
+        let videogamesComplete = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
+        let videogames = videogamesComplete.map(videogame => ({
+            name: videogame.name,             
+            image: videogame["background_image"],
+            genres: videogame.genres.map (genre => genre.name)
+        }));
         return videogames;
     } catch (error) {
         throw new Error (`No se pudieron obtener los generos de la API, ${error}`);
-    }
-
-    return 'getVideogamesFromAPI';
+    }    
 }
 
-function getAllVideogamesFromDB (){
-
+//ESTA OK: trae nombre, genero e imagen (hay q ver si queda y si la pido en el post del front)
+async function getAllVideogamesFromDB (){
+    try {
+        const foundVideogamesComplete = await Videogame.findAll({
+            include: Genre
+        });
+        const foundVideogames = foundVideogamesComplete.map(foundVideogame => ({
+            name: foundVideogame.name,
+            image: foundVideogame.image,
+            genres: foundVideogame.Genres.map (genre => genre.name)
+        }));        
+        return foundVideogames;        
+    } catch (error) {
+        throw new Error (`No se encontraron videojuegos cargados en la base de datos, ${error}`);
+    }     
 }
 
 

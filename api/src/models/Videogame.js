@@ -24,10 +24,13 @@ module.exports = (sequelize) => {
     rating: {
       type: DataTypes.FLOAT
     },
-    platforms: {
-      //type: DataTypes.TEXT, 
+    platforms: {      
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
+    },
+    //Preguntar si esta bien incluir esto ya q en el Readme no esta, pero es necesario para el front ruta ppal
+    image: {
+      type: DataTypes.STRING
     }
   },
   {

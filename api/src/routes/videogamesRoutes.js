@@ -19,21 +19,8 @@ router.get('/:id', (req,res) => {
 router.get('/', (req,res) => {
     const {search} = req.query;
     console.log(`search: ${search}`);
-    // try {
-    //     if(search){            
-    //         const fc = getVideogamesByName(search);
-    //         return res.send(`Estas en un GET de videogames/, mandaste por query el search ${search} y se acaba de llamar la funcion ${fc}`);
-    //     }
-    //     const fc = getVideogamesFromAPI();
-    //     // const videogames = getVideogamesFromAPI();
-    //     // return res.json(videogames);
-    //     return res.send(`Estas en un GET de videogames/ y se acaba de llamar la funcion ${fc}`);
-    // } catch (error) {
-    //     return res.send(error);
-    // }
-
     try {
-        getVideogames(search).then(videogames => res.json(videogames));
+        return getVideogames(search).then(videogames => res.json(videogames));
     } catch (error) {
         return res.send(error);
     }
