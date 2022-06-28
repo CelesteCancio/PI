@@ -3,16 +3,17 @@ const {getVideogameById} = require ('../controllers/videogameControllers');
 
 const router = Router();
 
-router.get('/:idVideogame', (req,res) => {
-    const {idVideogame} = req.params;
+
+router.get('/:id', (req,res) => {
+
+    const id = req.params.id;  
+    console.log(`estas en ruta get videogame/id, el id ingresado es ${id}`);  
     try {
-        const fc = getVideogameById(idVideogame);
-        return res.send(`Estas en un GET de videogame/, mandaste por params el id ${idVideogame} y se acaba de llamar la funcion ${fc}`);
+        getVideogameById(id).then(videogame => res.json(videogame));
     } catch (error) {
         return res.send(error);
     }
-})
-
+});
 
 
 module.exports = router;

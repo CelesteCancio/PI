@@ -6,58 +6,6 @@ const {
 } = process.env;
 
 
-//Ruta GET, con parametro ID:
-
-//ANDA OK
-function getVideogameById (id){
-    const regex = /[a-zA-Z]/;
-        if (regex.test(id)){
-            console.log(`db`);
-            return getVideogameByIdFromDB(id);
-        }
-        else{
-            console.log(`api`);
-            return getVideogameByIdFromAPI(id);
-        }
-}
-
-//anda OK, solo falta q traiga unicamente los datos q necesito para el front
-async function getVideogameByIdFromAPI (id){
-    try {
-        console.log(`en getVideogamesByIdFromAPI, id ${id}`)
-
-        //si anda:
-        let videogame = (await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data; 
-        return videogame;
-
-        //si anda:
-        // let videogame = axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-        // .then(response => response.data);
-        // return videogame;
-
-        //no anda:
-        // let videogame = fetch.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-        // .then(response => response.json())
-        // .then(game => {game.results.name, game.results.id, game.results.genres, game.results["background_image"], game.results.rating});
-        // return videogame;
-    
-    } catch (error) {
-        throw new Error (`No se pudo obtener el videojuego de id ${id} de la API, ${error}`);
-    }
-}
-
-//anda OK, solo falta q traiga unicamente los datos q necesito para el front
-async function getVideogameByIdFromDB (id){
-    try {
-        const foundVideogame = await Videogame.findByPk(id,{
-            include: Genre
-        });
-        return foundVideogame;
-    } catch (error) {
-        throw new Error (`No se pudo encontrar el videojuego en la base de datos, ${error}`);
-    }
-}
-
 //Ruta GET, con y sin query. Para traer todos los videojuegos o solo los del nombre, de DB y de API.
 
 function getVideogames (name){
@@ -178,7 +126,7 @@ async function getVideogamesByNameFromAPI (name){
         }
 }
 
-//ANDA OK:
+//ANDA OK: pero trae todo, no solo lo q quiere el front
 async function getVideogamesByNameFromDB (name){
     
     try {
@@ -213,7 +161,6 @@ async function addVideogame (videogame){
 }
 
 module.exports = { 
-    getVideogameById,
     getVideogames,
     addVideogame
  }
