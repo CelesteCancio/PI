@@ -154,7 +154,8 @@ async function getVideogamesByName (name){
             return allVideogamesByName15;            
         } 
 
-        return allVideogamesByName; 
+        if (allVideogamesByName.length>0) return allVideogamesByName; 
+        else return `No se encontraron videojuegos con el nombre ${name}`;
     } catch (error) {
         throw new Error (`No se encontraron videojuegos con el nombre ${name}, ${error}`);
     }
