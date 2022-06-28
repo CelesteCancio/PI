@@ -1,5 +1,6 @@
 const {Videogame, Genre} = require ('../db');
 const axios = require ('axios');
+const { Op } = require('sequelize');
 const {
     API_KEY,
 } = process.env;
@@ -61,7 +62,7 @@ async function getVideogameByIdFromDB (id){
 
 function getVideogames (name){
     if (name){
-        console.log(getVideogamesByName (name));
+        return getVideogamesByName (name);
     }
     else{
         return getAllVideogames ();
@@ -79,21 +80,6 @@ async function getAllVideogames (){
     } catch (error) {
         throw new Error (`No se pudieron cargar todos los videojuegos, ${error}`);
     }
-}
-
-function getVideogamesByName (name){
-    
-    getVideogamesByNameFromAPI (name);
-    getVideogamesByNameFromDB (name);
-    return `Soy getVideogamesByName, quien acaba de recibir el nombre ${name}`;
-}
-
-function getVideogamesByNameFromAPI (name){
-
-}
-
-function getVideogamesByNameFromDB (name){
-    
 }
 
 //ESTA OK, trae solo los primeros 100 juegos, y solo la informacion necesaria para el front
@@ -156,6 +142,38 @@ async function getAllVideogamesFromDB (){
         throw new Error (`No se encontraron videojuegos cargados en la base de datos, ${error}`);
     }     
 }
+
+function getVideogamesByName (name){
+    
+    console.log(`Soy getVideogamesByName, quien acaba de recibir el nombre ${name}`);
+    const videogamesByNameFromDB = getVideogamesByNameFromDB (name);
+    //getVideogamesByNameFromAPI (name);    
+    return videogamesByNameFromDB;
+}
+
+function getVideogamesByNameFromAPI (name){
+
+}
+
+async function getVideogamesByNameFromDB (name){
+    
+    try {
+        const foundVideogamesName = await Videogame.findAll({
+            // where: {
+            //     name: {
+            //         //no anda la regexp
+            //         [Op.regexp]: `/(${name})/i`
+            //     }
+            // }
+        });
+        return foundVideogamesName;
+    } catch (error) {
+        throw new Error (`No se pudieron obtener los videojuegos con el nombre ${name} de la DB, ${error}`);
+    }
+
+}
+
+
 
 
 //Ruta POST, agregar videojuego a la DB
