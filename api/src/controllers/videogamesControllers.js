@@ -100,10 +100,7 @@ async function getAllVideogamesFromAPI (){
         //     image: videogame["background_image"],
         //     genres: videogame.genres.map (genre => genre.name)
         // }));
-        // return videogames;
-
-        // let videogamesComplete1 = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
-        // let videogamesComplete1 = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results;
+        // return videogames;        
 
     
         let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
@@ -143,32 +140,57 @@ async function getAllVideogamesFromDB (){
     }     
 }
 
-function getVideogamesByName (name){
+//ANDA OK y devuelve solo 15
+async function getVideogamesByName (name){
     
-    console.log(`Soy getVideogamesByName, quien acaba de recibir el nombre ${name}`);
-    const videogamesByNameFromDB = getVideogamesByNameFromDB (name);
-    //getVideogamesByNameFromAPI (name);    
-    return videogamesByNameFromDB;
+    try {
+        
+        const videogamesByNameFromDB = await getVideogamesByNameFromDB (name);        
+        const videogamesByNameFromAPI = await getVideogamesByNameFromAPI (name);         
+        const allVideogamesByName = [...videogamesByNameFromDB, ...videogamesByNameFromAPI]; 
+
+        if (allVideogamesByName.length>15){            
+            const allVideogamesByName15 = allVideogamesByName.slice(0,15)            
+            return allVideogamesByName15;            
+        } 
+
+        return allVideogamesByName; 
+    } catch (error) {
+        throw new Error (`No se encontraron videojuegos con el nombre ${name}, ${error}`);
+    }
+    
 }
 
-function getVideogamesByNameFromAPI (name){
+//ANDA OK:
+async function getVideogamesByNameFromAPI (name){
 
+        try {
+            let foundVideogamesComplete = (await axios(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)).data.results; 
+            let foundVideogames = foundVideogamesComplete.map(videogame => ({
+            name: videogame.name,             
+            image: videogame["background_image"],
+            genres: videogame.genres.map (genre => genre.name)
+            }));
+            return foundVideogames;  
+        } catch (error) {
+            throw new Error (`No se encontraron videojuegos en la API con el nombre ${name}, ${error}`);
+        }
 }
 
+//ANDA OK:
 async function getVideogamesByNameFromDB (name){
     
     try {
         const foundVideogamesName = await Videogame.findAll({
-            // where: {
-            //     name: {
-            //         //no anda la regexp
-            //         [Op.regexp]: `/(${name})/i`
-            //     }
-            // }
+            where: {
+                name: {                    
+                    [Op.iLike]: `%${name}%`,
+                }
+            }
         });
         return foundVideogamesName;
     } catch (error) {
-        throw new Error (`No se pudieron obtener los videojuegos con el nombre ${name} de la DB, ${error}`);
+        throw new Error (`No se encontraron videojuegos en la DB con el nombre ${name}, ${error}`);
     }
 
 }
