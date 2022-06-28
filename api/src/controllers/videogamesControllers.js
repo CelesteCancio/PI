@@ -96,10 +96,10 @@ function getVideogamesByNameFromDB (name){
     
 }
 
-//ESTA OK, pero falta q traiga solo 100 juegos
+//ESTA OK, trae solo los primeros 100 juegos, y solo la informacion necesaria para el front
 async function getAllVideogamesFromAPI (){
     try {
-        //ASI NO:
+        //ASI NO anda:
         // let videogames = axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
         // .then(response => response.data.map (videogame => ({
         //    name: videogame.name,             
@@ -107,13 +107,34 @@ async function getAllVideogamesFromAPI (){
         //     genres: videogame.genres.map (genre => genre.name)
         // })))
                 
-        let videogamesComplete = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
-        let videogames = videogamesComplete.map(videogame => ({
-            name: videogame.name,             
-            image: videogame["background_image"],
-            genres: videogame.genres.map (genre => genre.name)
-        }));
-        return videogames;
+        //ASI SI, pero trae solo 20 xq es un solo llamado
+        // let videogamesComplete = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
+        // let videogames = videogamesComplete.map(videogame => ({
+        //     name: videogame.name,             
+        //     image: videogame["background_image"],
+        //     genres: videogame.genres.map (genre => genre.name)
+        // }));
+        // return videogames;
+
+        // let videogamesComplete1 = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
+        // let videogamesComplete1 = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results;
+
+    
+        let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
+        let videogames100 = [];
+        for (let i = 0; i < 5; i++) {
+            let videogamesComplete20 = (await axios(URL)).data; 
+            URL = videogamesComplete20.next;
+            console.log(i,URL);
+            let videogames20 = videogamesComplete20.results.map(videogame => ({
+                name: videogame.name,             
+                image: videogame["background_image"],
+                genres: videogame.genres.map (genre => genre.name)
+            }));
+            console.log(videogames20[0]);
+            videogames100 = [...videogames100, ...videogames20];           
+        }
+        return videogames100;
     } catch (error) {
         throw new Error (`No se pudieron obtener los generos de la API, ${error}`);
     }    
@@ -138,7 +159,7 @@ async function getAllVideogamesFromDB (){
 
 
 //Ruta POST, agregar videojuego a la DB
-//ANDA OK pero creo q hay q agregar el campo imagen
+//ANDA OK
 async function addVideogame (videogame){
     const genresId = videogame.genresId; //tiene q ser un arreglo y llamarse igual en el envio de info desde front
     try {
