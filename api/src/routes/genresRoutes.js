@@ -15,7 +15,8 @@ router.get('/fromAPI', (req,res) => {
 
 router.get('/', (req,res) => {    
     try {        
-        showGenres().then(genres => res.json(genres));
+        showGenres().then(genres => 
+            typeof videogame === "object" ? res.json(genres) : res.status(404).json(genres));
 
         // Si no uso showGenres, lo puedo llamar desde aca, pero no es tan prolijo:
         // Genre.findAll().then (foundGenres => 

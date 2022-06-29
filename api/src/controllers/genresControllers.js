@@ -28,7 +28,9 @@ async function insertGenresIntoDb (genreId, genreName){
 async function showGenres (){
     try {
         const foundGenres = await Genre.findAll();
-        return foundGenres;
+        if (foundGenres.length>0) return foundGenres;
+        else return `No se encontraron generos cargados en la base de datos`;
+
     } catch (error) {
         throw new Error (`No se encontraron generos cargados en la base de datos, ${error}`);
     }
