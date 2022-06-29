@@ -1,5 +1,5 @@
 const {Router} = require ("express");
-const {getVideogames, addVideogame} = require ("../controllers/videogamesControllers");
+const {getVideogames, addVideogame, sortVideogamesByRating} = require ("../controllers/videogamesControllers");
 
 
 const router = Router();
@@ -23,7 +23,18 @@ router.post('/', async (req,res) => {
     } catch (error) {
         return res.send(error);
     }
-})
+});
+
+//Ruta de prueba para ordenar por rating
+router.get('/sortbyrating', (req,res) => {    
+    console.log(`en '/sortbyrating'`);
+    try {
+        return sortVideogamesByRating().then(videogames => 
+            res.json(videogames));
+    } catch (error) {
+        return res.send(error);
+    }
+});
 
 
 module.exports = router;

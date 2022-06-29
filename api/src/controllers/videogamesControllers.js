@@ -60,7 +60,8 @@ async function getAllVideogamesFromAPI (){
             let videogames20 = videogamesComplete20.results.map(videogame => ({
                 name: videogame.name,             
                 image: videogame["background_image"],
-                genres: videogame.genres.map (genre => genre.name)
+                genres: videogame.genres.map (genre => genre.name),
+                rating: videogame.rating
             }));
             console.log(videogames20[0]);
             videogames100 = [...videogames100, ...videogames20];           
@@ -118,7 +119,8 @@ async function getVideogamesByNameFromAPI (name){
             let foundVideogames = foundVideogamesComplete.map(videogame => ({
             name: videogame.name,             
             image: videogame["background_image"],
-            genres: videogame.genres.map (genre => genre.name)
+            genres: videogame.genres.map (genre => genre.name),
+            rating: videogame.rating
             }));
             return foundVideogames;  
         } catch (error) {
@@ -160,7 +162,22 @@ async function addVideogame (videogame){
     }
 }
 
+
+//ORDENAR ALFABETICAMENTE. No ordena un pomelo. Y no quiero hacer otra llamada a la API, no deberia hacerlo en la misma ruta con otro query?
+async function sortVideogamesByRating (){
+//     try {
+//         const videogames = await getVideogames();
+//         const sortedVideogames = videogames.map(videogame => videogame.sort((a,b) => {
+//             return a.rating > b.rating;
+//         }));
+//         return sortedVideogames;
+//     } catch (error) {
+//         return `No se pudieron obtener los videojuegos para ordenarlos por rating`;
+//     }
+}
+
 module.exports = { 
     getVideogames,
-    addVideogame
+    addVideogame,
+    sortVideogamesByRating
  }
