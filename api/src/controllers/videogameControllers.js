@@ -6,7 +6,7 @@ const {
 
 //Ruta GET, con parametro ID:
 
-//ANDA OK la parte de API peor no la de DB
+//ANDA OK:
 async function getVideogameById (id){
     const regex = /[a-zA-Z]/;
         if (regex.test(id)){
@@ -24,14 +24,14 @@ async function getVideogameById (id){
         }
 }
 
-//anda OK, solo falta q traiga unicamente los datos q necesito para el front
+//ANDA OK
 async function getVideogameByIdFromAPI (id){
     try {
         console.log(`en getVideogamesByIdFromAPI, id ${id}`);
 
         //si anda:
         let foundVideogameByIdComplete = (await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data;         
-
+        console.log(foundVideogameByIdComplete);
         // si anda:
         // let foundVideogameByIdComplete = axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
         // .then(response => response.data);
@@ -44,12 +44,13 @@ async function getVideogameByIdFromAPI (id){
         return foundVideogameById;
    
     } catch (error) {
+        console.log(error);
         //throw new Error (`No se pudo obtener el videojuego de id ${id} de la API, ${error}`);
         return false;
     }
 }
 
-//NO ANDA, tira siempre falso
+//ANDA OK pero trae todos los datos
 async function getVideogameByIdFromDB (id){
     try {
         const foundVideogame = await Videogame.findByPk(id,{
