@@ -8,7 +8,8 @@ router.get('/', (req,res) => {
     const {search} = req.query;
     console.log(`search: ${search}`);
     try {
-        return getVideogames(search).then(videogames => res.json(videogames));
+        return getVideogames(search).then(videogames => 
+            typeof videogames === "object" ? res.json(videogames) : res.status(404).json(videogames));
     } catch (error) {
         return res.send(error);
     }
