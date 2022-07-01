@@ -61,7 +61,8 @@ async function getAllVideogamesFromAPI (){
                 name: videogame.name,             
                 image: videogame["background_image"],
                 genres: videogame.genres.map (genre => genre.name),
-                rating: videogame.rating
+                rating: videogame.rating,
+                id: videogame.id
             }));
             console.log(videogames20[0]);
             videogames100 = [...videogames100, ...videogames20];           
@@ -120,7 +121,8 @@ async function getVideogamesByNameFromAPI (name){
             name: videogame.name,             
             image: videogame["background_image"],
             genres: videogame.genres.map (genre => genre.name),
-            rating: videogame.rating
+            rating: videogame.rating,
+            id:videogame.id
             }));
             return foundVideogames;  
         } catch (error) {
