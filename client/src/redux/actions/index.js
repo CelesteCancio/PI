@@ -18,13 +18,24 @@ export function fetchVideogames (){
             })
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error);//hacer algo mas q consologuear
         })
     }
 }
 
-export function searchVideogames (){
-    
+export function searchVideogames (name){
+    return function (dispatch){
+        return axios.get(`http://localhost:3001/api/videogames?name=${name}`)
+        .then((videogames) => {
+            dispatch({
+                type: SEARCH_VIDEOGAMES,
+                payload: videogames.data
+            })
+        })
+        .catch((error) => {
+            console.log(error);//hacer algo mas q consologuear
+        })
+    }
 }
 
 export function getVideogameDetail (id){
