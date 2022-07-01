@@ -39,7 +39,9 @@ async function getVideogameByIdFromAPI (id){
         let foundVideogameById = {
             name: foundVideogameByIdComplete.name,             
             image: foundVideogameByIdComplete["background_image"],
-            genres: foundVideogameByIdComplete.genres.map (genre => genre.name)
+            genres: foundVideogameByIdComplete.genres.map (genre => genre.name),
+            description: foundVideogameByIdComplete.description,
+            platforms: foundVideogameByIdComplete.platforms.map (p => p.platform.name)
         };
         return foundVideogameById;
    
