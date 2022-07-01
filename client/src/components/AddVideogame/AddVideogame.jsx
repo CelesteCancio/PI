@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch }  from 'react-redux';
+import { addVideogame } from "../../redux/actions";
+
 
 export default function AddVideogame (){
 
-    let defaultDate = new Date();
+    
     const [state, setState] = React.useState({
         name:"",
         description:"",
@@ -13,14 +16,15 @@ export default function AddVideogame (){
         platforms:""
     });
 
-    function handleChange (e) {
-        e.preventDefault(); //hace falta aca o no?
+    function handleChange (e) {        
         setState( (previousState) => ({...previousState, [e.target.name]:e.target.value}));
     };
 
+    let dispatch = useDispatch();
+
     function handleSubmit (e){
-        e.preventDefault();
-        //tiene q guardar esta info
+        e.preventDefault();                
+        dispatch (addVideogame(state));
         setState({        
             name:"",
             description:"",
