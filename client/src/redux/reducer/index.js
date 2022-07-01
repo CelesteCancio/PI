@@ -1,7 +1,8 @@
-import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, SEARCH_VIDEOGAMES } from "../actions";
+import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_VIDEOGAME_DETAIL, SEARCH_VIDEOGAMES } from "../actions";
 
 const initialState = {
-    videogames: []
+    videogames: [],
+    videogameDetail: {}
 };
 
 export default function rootReducer (state = initialState, action){
@@ -24,6 +25,12 @@ export default function rootReducer (state = initialState, action){
                 videogames: action.payload
             }
 
+        case GET_VIDEOGAME_DETAIL:
+            return {
+                ...state,
+                videogameDetail: action.payload
+            }
+            
         default: return {...state}
     }
 
