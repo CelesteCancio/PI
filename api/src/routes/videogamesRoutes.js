@@ -5,10 +5,10 @@ const {getVideogames, addVideogame, sortVideogamesByRating} = require ("../contr
 const router = Router();
 
 router.get('/', (req,res) => {
-    const {search} = req.query;
-    console.log(`search: ${search}`);
+    const {name} = req.query;
+    console.log(`search: ${name}`);
     try {
-        return getVideogames(search).then(videogames => 
+        return getVideogames(name).then(videogames => 
             typeof videogames === "object" ? res.json(videogames) : res.status(404).json(videogames));
     } catch (error) {
         return res.send(error);
