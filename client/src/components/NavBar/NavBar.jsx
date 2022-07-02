@@ -16,9 +16,6 @@ export default function NavBar (){
                 <li>
                     <NavLink to={'/addVideogame'}>Agregar videojuego</NavLink>
                 </li>
-                <li>
-                    <NavLink to={'/ejemplo'}>Ejemplo</NavLink>
-                </li>
                 <li><Filter/></li>
                 <li>Ordenar</li>
                 <li><SearchBar/></li>                

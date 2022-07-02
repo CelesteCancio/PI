@@ -20,19 +20,19 @@ export default function Filter (){
 
     return (
         <div>
-            <menu label='Filtrar'>
+            {/* <menu label='Filtrar'>
                 <menuitem label='Por género'>
                 {/* {genres && genres.map((genre) => (
                 <Genre name={genre.name}/> */}
                     {/* <menuitem><Genre/></menuitem> */}
-                </menuitem>
+                {/* </menuitem>
                 <menuitem label='Autor'>
                     <menuitem>Creación propia</menuitem>
                     <menuitem>API RAWG</menuitem>
                 </menuitem>
             </menu>
             <input type={'text'} name="search" value={state.search} onChange={(e) => handleChange(e)}/>
-            <button onClick={(e) => handleClick(e)}>Buscar</button>
+            <button onClick={(e) => handleClick(e)}>Buscar</button> */} 
         </div>
     )
 }
