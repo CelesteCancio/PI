@@ -62,7 +62,8 @@ async function getAllVideogamesFromAPI (){
                 image: videogame["background_image"],
                 genres: videogame.genres.map (genre => genre.name),
                 rating: videogame.rating,
-                id: videogame.id
+                id: videogame.id,
+                platforms: videogame.platforms.map (p => p.platform.name),
             }));
             console.log(videogames20[0]);
             videogames100 = [...videogames100, ...videogames20];           
