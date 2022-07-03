@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { filterByGenre, filterByOrigin } from "../../redux/actions";
+import { filterByGenre } from "../../redux/actions";
 
 import { useSelector } from "react-redux";
 
 import Genre from '../Genre/Genre';
 
-export default function BtnFilter (){
+export default function BtnFilterGenre (){
 
     const [state, setState] = React.useState({filter:""});
     let genres = useSelector( (state) => state.genres); //mapStateToProps en clase    
@@ -18,26 +18,36 @@ export default function BtnFilter (){
         setState({filter:""})
     }
 
-    function handleClickOrigin (e){
-        setState( (previousState) => ({...previousState, filter:e.target.value}));
-        dispatch (filterByOrigin(state.filter));//API o DB
-        setState({filter:""})
-    }
+
 
     return (
         <div>
-            {<menu>Filtrar
-                <menuitem>
-                    Por género
-                </menuitem>
-                <menuitem>
-                    Por origen
-                </menuitem>
-            </menu>
-            }
+            <div>
+                <label>
+                    Filtrar por género
+                    <select value="genero">
+                    <option value="az">A-`{'>'}`Z</option>
+                    <option value="za">Z-`{'>'}`A</option>
+                </select>
+                </label>
+                
+            </div>
         </div>
     )
 }
+
+// {<menu>Filtrar
+//     <menuitem>
+//         Por género
+//     </menuitem>
+//     <menuitem>
+//         Por origen
+//     </menuitem>
+// </menu>
+// }
+
+// <option value="az">A-`{'>'}`Z</option>
+// <option value="za">Z-`{'>'}`A</option>
 
 /* <menu label='Filtrar'>
                 <menuitem label='Por género'>

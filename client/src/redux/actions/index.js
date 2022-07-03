@@ -7,6 +7,7 @@ export const GET_GENRES = "GET_GENRES";
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 export const FILTER_BY_API = "FILTER_BY_API";
 export const FILTER_BY_DB = "FILTER_BY_DB";
+export const DBVIDEOGAMES_NOT_FOUND = "DBVIDEOGAMES_NOT_FOUND";
 
 
 export function addVideogame (videogame){
@@ -78,15 +79,34 @@ export function filterByGenre (genre){
 
 export function filterByOrigin (origin){
     if(origin === "API"){
-        return {
-            type: FILTER_BY_API,
-            payload: ""
+        return function (dispatch){
+            return axios.get('http://localhost:3001/api/videogames/fromAPI')
+            .then((videogames) => {
+                dispatch({
+                    type: FILTER_BY_API,
+                    payload: videogames.data
+                })
+            })
+            .catch((error) => {
+                console.log(error);//hacer algo mas q consologuear
+            })
         }
     }
     else{
-        return {
-            type: FILTER_BY_DB,
-            payload: ""
+        return function (dispatch){
+            return axios.get('http://localhost:3001/api/videogames/fromDB')
+            .then((videogames) => {
+                dispatch({
+                    type: FILTER_BY_DB,
+                    payload: videogames.data
+                })
+            })
+            .catch((error) => {
+                dispatch({
+                    type: DBVIDEOGAMES_NOT_FOUND,
+                    payload: "No hay nuevos videojuegos agregados en la base de datos."
+                })
+            })
         }
     }
 }

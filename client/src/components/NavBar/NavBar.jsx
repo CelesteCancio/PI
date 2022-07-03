@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import BtnFilter from "../BtnFilter/BtnFilter";
+import BtnFilterOrigin from "../BtnFilterOrigin/BtnFilterOrigin";
+import BtnFilterGenre from "../BtnFilterGenre/BtnFilterGenre";
+import BtnReload from "../BtnReload/BtnReload";
 
 export default function NavBar (){    
 
@@ -16,8 +18,10 @@ export default function NavBar (){
                 <li>
                     <NavLink to={'/addVideogame'}>Agregar videojuego</NavLink>
                 </li>
-                <li><BtnFilter/></li>
-                <li>Ordenar</li>
+                <li><BtnFilterGenre/></li>
+                <li><BtnFilterOrigin/></li>
+                {/* <li><BtnSort/></li> */}
+                <li><BtnReload/></li>
                 <li><SearchBar/></li>                
             </ul>
         </nav>
