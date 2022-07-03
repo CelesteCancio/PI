@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchVideogames } from "../../redux/actions";
+import ErrorComponent from "../ErrorComponent/ErrorComponent";
 import VideogameCard from "../VideogameCard/VideogameCard";
 
 export default function Videogames (){
@@ -12,6 +13,7 @@ export default function Videogames (){
     console.log(videogames);
     return (
         <div>
+            <ErrorComponent/>
             {videogames && videogames.map((videogame) => (
                 <VideogameCard 
                 key={videogame.id} 
