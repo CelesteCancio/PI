@@ -71,6 +71,7 @@ export function getGenres (){
 }
 
 export function filterByGenre (genre){
+    console.log(`en filterByGenre, genre: ${genre}`)
     return {
         type: FILTER_BY_GENRE,
         payload: genre

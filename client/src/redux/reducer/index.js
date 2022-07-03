@@ -53,7 +53,7 @@ export default function rootReducer (state = initialState, action){
         case FILTER_BY_GENRE:
             return {
                 ...state,
-                videogames: state.videogames.filter(v=>v.genres.forEach(g=>g===action.payload)),
+                videogames: state.videogames.filter(v=>v.genres.includes(action.payload)),
                 error:""
             }    
 
