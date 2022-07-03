@@ -10,7 +10,8 @@ export const FILTER_BY_DB = "FILTER_BY_DB";
 export const DBVIDEOGAMES_NOT_FOUND = "DBVIDEOGAMES_NOT_FOUND";
 export const SORT_AZ = "SORT_AZ";
 export const SORT_ZA = "SORT_ZA";
-export const SORT_BY_RATING = "SORT_BY_RATING";
+export const SORT_BY_RATING_INC = "SORT_BY_RATING_INC";
+export const SORT_BY_RATING_DEC = "SORT_BY_RATING_DEC";
 
 
 export function addVideogame (videogame){
@@ -114,8 +115,7 @@ export function filterByOrigin (origin){
     }
 }
 
-export function sortAZ (sort){
-    console.log(`en sortAZ: ${sort}`)
+export function sortAZ (sort){    
     if(sort==='az')
     return {
         type: SORT_AZ,
@@ -129,10 +129,16 @@ export function sortAZ (sort){
     }
 }
 
-export function sortByRating (){
-    console.log(`en sortByRating`)
+export function sortByRating (sort){
+    if(sort==='increasing')
     return {
-        type: SORT_BY_RATING,
+        type: SORT_BY_RATING_INC,
         payload: ""
+    }
+    else{
+        return {
+            type: SORT_BY_RATING_DEC,
+            payload: ""
+        }
     }
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_VIDEOGAME_DETAIL, 
     SEARCH_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_API, FILTER_BY_DB, DBVIDEOGAMES_NOT_FOUND,
-    SORT_AZ, SORT_ZA, SORT_BY_RATING } from "../actions";
+    SORT_AZ, SORT_ZA, SORT_BY_RATING_INC, SORT_BY_RATING_DEC } from "../actions";
 
 const initialState = {
     videogames: [],    
@@ -92,9 +92,19 @@ export default function rootReducer (state = initialState, action){
                     a.name>b.name ? -1 : (a.name<b.name) ? 1 : 0
                     )})],
                 error: ""
-            }            
-        
-
+            }         
+        case SORT_BY_RATING_INC:
+            return {
+                ...state,
+                videogames: [...state.videogames.sort((a,b) => (a.rating - b.rating ))],
+                error: ""
+            } 
+        case SORT_BY_RATING_DEC:
+            return {
+                ...state,
+                videogames: [...state.videogames.sort((a,b) => (b.rating - a.rating ))],
+                error: ""
+            }             
         default: return {...state}
     }
 

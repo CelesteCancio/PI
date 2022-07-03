@@ -5,6 +5,7 @@ import BtnFilterOrigin from "../BtnFilterOrigin/BtnFilterOrigin";
 import BtnFilterGenre from "../BtnFilterGenre/BtnFilterGenre";
 import BtnReload from "../BtnReload/BtnReload";
 import BtnSortAZ from "../BtnSortAZ/BtnSortAZ";
+import BtnSortRating from "../BtnSortRating/BtnSortRating";
 
 export default function NavBar (){    
 
@@ -22,6 +23,7 @@ export default function NavBar (){
                 <li><BtnFilterGenre/></li>
                 <li><BtnFilterOrigin/></li>
                 <li><BtnSortAZ/></li>
+                <li><BtnSortRating/></li>
                 <li><BtnReload/></li>
                 <li><SearchBar/></li>                
             </ul>

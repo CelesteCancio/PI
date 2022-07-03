@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { sortAZ } from "../../redux/actions";
+import { sortByRating } from "../../redux/actions";
 
-export default function BtnSortAZ (){
+export default function BtnSortRating (){
 
     const [state, setState] = React.useState({sort:""});        
     let dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function BtnSortAZ (){
 
     function handleSubmit (e){
         e.preventDefault();
-        dispatch (sortAZ(state.sort));//az o za...
+        dispatch (sortByRating(state.sort));//increasing o decreasing...
         setState({sort:""})
     }
 
@@ -21,11 +21,11 @@ export default function BtnSortAZ (){
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>
-                    Ordenar alfabéticamente
+                    Ordenar por rating
                     <select value={state.sort} onChange={(e) => handleChange(e)}>
                         <option>Seleccionar orden</option>
-                        <option value="az">Ordenar A -`&GT;` Z</option>
-                        <option value="za">Ordenar Z -`&GT;` A</option>                               
+                        <option value="increasing">Mayor a menor rating</option>
+                        <option value="decreasing">Menor a mayor rating</option>                               
                     </select>
                 </label>
                 <input type="submit" value="Ordenar" />
