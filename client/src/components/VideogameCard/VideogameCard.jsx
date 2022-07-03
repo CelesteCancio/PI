@@ -5,10 +5,10 @@ export default function VideogameCard ({id, name, image, genres, rating}){
         <Link to={`/videogame/${id}`}>
             <div key={id}>            
                 <h2>{name}</h2>   
-                <h2>{id}</h2>         
+                {/* <h2>{id}</h2>          */}
                 <img src={image} alt={name} width="300px"/>
                 <h3>{genres && `Géneros: ${genres.join(", ")}`}</h3>
-                <h3>{`Rating: ${rating}`}</h3>
+                <h4>{`Rating: ${rating}`}</h4>
                 {/* <button onClick={(e) => addFavourite(e)}>Agregar a favoritos</button> */}
             </div>
         </Link>

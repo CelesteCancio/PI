@@ -8,6 +8,9 @@ export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 export const FILTER_BY_API = "FILTER_BY_API";
 export const FILTER_BY_DB = "FILTER_BY_DB";
 export const DBVIDEOGAMES_NOT_FOUND = "DBVIDEOGAMES_NOT_FOUND";
+export const SORT_AZ = "SORT_AZ";
+export const SORT_ZA = "SORT_ZA";
+export const SORT_BY_RATING = "SORT_BY_RATING";
 
 
 export function addVideogame (videogame){
@@ -70,8 +73,7 @@ export function getGenres (){
     }
 }
 
-export function filterByGenre (genre){
-    console.log(`en filterByGenre, genre: ${genre}`)
+export function filterByGenre (genre){    
     return {
         type: FILTER_BY_GENRE,
         payload: genre
@@ -109,5 +111,28 @@ export function filterByOrigin (origin){
                 })
             })
         }
+    }
+}
+
+export function sortAZ (sort){
+    console.log(`en sortAZ: ${sort}`)
+    if(sort==='az')
+    return {
+        type: SORT_AZ,
+        payload: ""
+    }
+    else{
+        return {
+            type: SORT_ZA,
+            payload: ""
+        }
+    }
+}
+
+export function sortByRating (){
+    console.log(`en sortByRating`)
+    return {
+        type: SORT_BY_RATING,
+        payload: ""
     }
 }
