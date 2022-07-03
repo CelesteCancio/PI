@@ -1,4 +1,4 @@
-import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, SEARCH_VIDEOGAMES } from "../actions";
+import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_VIDEOGAME_DETAIL, SEARCH_VIDEOGAMES } from "../actions";
 
 const initialState = {
     videogames: [],
@@ -9,16 +9,20 @@ const initialState = {
 
 export default function rootReducer (state = initialState, action){
     switch (action.type){
-        case ADD_VIDEOGAME:
+        case ADD_VIDEOGAME:            
             return {
                 ...state,
-                videogames: [...state.videogames, action.payload] // videogames = [{},{},{}]
+                videogames: [...state.videogames, action.payload], // videogames = [{},{},{}]                
             }
         
         case FETCH_VIDEOGAMES:
+            let platformsAux = [];
+            action.payload.forEach(videogame => {
+                if (!platformsAux.includes(videogame.platforms)) platformsAux.push(videogame.platforms)});
             return {
                 ...state,
-                videogames: action.payload
+                videogames: action.payload,
+                platforms: [...platformsAux]
             }
 
         case SEARCH_VIDEOGAMES:
@@ -37,18 +41,7 @@ export default function rootReducer (state = initialState, action){
             return {
                 ...state,
                 genres: action.payload
-            }
-
-        // case GET_GENRES_FROM_API:
-        //     return {
-        //         ...state,
-        //     }        
-
-        case GET_PLATFORMS:
-            return {
-                ...state,
-                platforms: action.payload
-            }    
+            }      
             
         default: return {...state}
     }

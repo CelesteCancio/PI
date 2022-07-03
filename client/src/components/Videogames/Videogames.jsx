@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { fetchVideogames } from "../../redux/actions";
+import { fetchVideogames, getPlatforms } from "../../redux/actions";
 import VideogameCard from "../VideogameCard/VideogameCard";
 
 export default function Videogames (){
     let videogames = useSelector( (state) => state.videogames); //mapStateToProps en clase    
     let dispatch = useDispatch(); 
     useEffect (() => {
-        dispatch (fetchVideogames());
+        dispatch (fetchVideogames());        
     }, []); //ejecuta accion cdo se monta el componente
     console.log(videogames);
     return (

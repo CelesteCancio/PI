@@ -4,8 +4,6 @@ export const FETCH_VIDEOGAMES = 'FETCH_VIDEOGAMES';
 export const SEARCH_VIDEOGAMES = 'SEARCH_VIDEOGAMES';
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAME_DETAIL';
 export const GET_GENRES = "GET_GENRES";
-export const GET_PLATFORMS = "GET_PLATFORMS";
-export const GET_GENRES_FROM_API = "GET_GENRES_FROM_API";
 
 export function addVideogame (videogame){
     return {type: ADD_VIDEOGAME, payload: videogame};
@@ -54,18 +52,6 @@ export function getVideogameDetail (id){
     }
 }
 
-// export function getGenresFromAPI (){
-//     return function (dispatch){
-//         console.log(`en get genres`);
-//         return axios.get(`http://localhost:3001/api/genres/fromAPI`)
-//         .then(genres => {
-//             dispatch({
-//                 type: GET_GENRES_FROM_API,
-//                 payload: ""
-//             })
-//         })
-//     }
-// }
 export function getGenres (){
     return function (dispatch){
         console.log(`en get genres`);
@@ -74,18 +60,6 @@ export function getGenres (){
             dispatch({
                 type: GET_GENRES,
                 payload: genres.data
-            })
-        })
-    }
-}
-//url missing
-export function getPlatforms (){
-    return function (dispatch){
-        return axios.get()
-        .then(platforms => {
-            dispatch({
-                type: GET_PLATFORMS,
-                payload: platforms.data
             })
         })
     }
