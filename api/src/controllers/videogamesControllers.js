@@ -50,7 +50,7 @@ async function getAllVideogamesFromAPI (){
         // }));
         // return videogames;        
 
-    
+        console.log(`estoy en getAllvdFromAPI`)
         let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
         let videogames100 = [];
         for (let i = 0; i < 5; i++) {
@@ -70,7 +70,7 @@ async function getAllVideogamesFromAPI (){
         }
         return videogames100;
     } catch (error) {
-        throw new Error (`No se pudieron obtener los generos de la API, ${error}`);
+        throw new Error (`No se pudieron obtener los videojuegos de la API, ${error}`);
     }    
 }
 
@@ -182,5 +182,7 @@ async function sortVideogamesByRating (){
 module.exports = { 
     getVideogames,
     addVideogame,
-    sortVideogamesByRating
+    sortVideogamesByRating,
+    getAllVideogamesFromAPI,
+    getAllVideogamesFromDB
  }
