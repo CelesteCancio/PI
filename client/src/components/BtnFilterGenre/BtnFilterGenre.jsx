@@ -23,7 +23,8 @@ export default function BtnFilterGenre (){
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>
                     Filtrar por género
-                    <select value={state.genre} onChange={(e) => handleChange(e)}>                        
+                    <select value={state.genre} onChange={(e) => handleChange(e)}>
+                        <option>Seleccionar género</option>
                         {genres.map(genreObject => {
                             return (
                             <option key={genreObject.id} value={genreObject.name}>
