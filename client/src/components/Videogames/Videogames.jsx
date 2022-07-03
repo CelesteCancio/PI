@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { fetchVideogames, getPlatforms } from "../../redux/actions";
+import { fetchVideogames } from "../../redux/actions";
 import VideogameCard from "../VideogameCard/VideogameCard";
 
 export default function Videogames (){

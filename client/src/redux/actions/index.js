@@ -4,6 +4,10 @@ export const FETCH_VIDEOGAMES = 'FETCH_VIDEOGAMES';
 export const SEARCH_VIDEOGAMES = 'SEARCH_VIDEOGAMES';
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAME_DETAIL';
 export const GET_GENRES = "GET_GENRES";
+export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
+export const FILTER_BY_API = "FILTER_BY_API";
+export const FILTER_BY_DB = "FILTER_BY_DB";
+
 
 export function addVideogame (videogame){
     return {type: ADD_VIDEOGAME, payload: videogame};
@@ -62,5 +66,27 @@ export function getGenres (){
                 payload: genres.data
             })
         })
+    }
+}
+
+export function filterByGenre (genre){
+    return {
+        type: FILTER_BY_GENRE,
+        payload: genre
+    }
+}
+
+export function filterByOrigin (origin){
+    if(origin === "API"){
+        return {
+            type: FILTER_BY_API,
+            payload: ""
+        }
+    }
+    else{
+        return {
+            type: FILTER_BY_DB,
+            payload: ""
+        }
     }
 }
