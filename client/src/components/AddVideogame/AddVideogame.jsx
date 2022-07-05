@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector }  from 'react-redux';
 import { addVideogame, getGenres, fetchVideogames } from "../../redux/actions";
+import style from '../AddVideogame/addVideogame.module.css';
 
 function validate (values){    
     const errorsObject = {};        
@@ -10,7 +11,7 @@ function validate (values){
     if (values.rating<0 || values.rating>5) errorsObject.rating = "El rating debe estar entre 0 y 5";        
     //if (values.genres.length>3) errorsObject.genres = "No se pueden seleccionar más de 3 géneros";  
     //if (values.platforms.length>5) errorsObject.platforms = "No se pueden seleccionar más de 5 plataformas";  
-    if (values.platforms.length===0) errorsObject.platforms = "Debe elegir al menos una plataforma";    
+    if (values.platforms === "") errorsObject.platforms = "Debe elegir al menos una plataforma";    
     return errorsObject;
 }
 
@@ -95,21 +96,22 @@ export default function AddVideogame (){
 
     return (
         <React.Fragment>
-            <div>Agregar videojuego</div>
-            <br/>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <div className= {style.main}>
+            <div className= {style.title}><h1>Agregar videojuego</h1></div>
+            <br/>   
+            <form className= {style.formulario} onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <label>Nombre</label>
                     <input type={'text'} name="name" value={state.name} onChange={(e) => handleChange(e)}></input>
                     {errors.name && (
-                        <p>{errors.name}</p>
+                        <p className= {style.error}>{errors.name}</p>
                     )}
                 </div>
                 <div>
                     <label>Descripción</label>
                     <textarea name="description" value={state.description} onChange={(e) => handleChange(e)}></textarea>
                     {errors.description && (
-                        <p>{errors.description}</p>
+                        <p className= {style.error}>{errors.description}</p>
                     )}
                 </div>
                 <div>
@@ -153,12 +155,13 @@ export default function AddVideogame (){
                         }                
                     </select>                      
                     {errors.platforms && (
-                        <p>{errors.platforms}</p>
+                        <p className= {style.error}>{errors.platforms}</p>
                     )}
                 </div>
                 <br/>
-                <input type={'submit'} value={'Agregar'}/>
+                <input type={'submit'} value={'Agregar'} className= {style.submitForm}/>
             </form>
+            </div>
         </React.Fragment>
     )
 }

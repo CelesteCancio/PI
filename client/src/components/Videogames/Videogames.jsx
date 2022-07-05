@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchVideogames } from "../../redux/actions";
 import ErrorComponent from "../ErrorComponent/ErrorComponent";
 import VideogameCard from "../VideogameCard/VideogameCard";
 import style from '../Videogames/videogames.module.css';
+// import Paginado from "../Paginado/Paginado";
 
 export default function Videogames (){
     let videogames = useSelector( (state) => state.videogames); //mapStateToProps en clase    
@@ -15,6 +16,7 @@ export default function Videogames (){
     // const firstVideogameIndex = lastVideogameIndex - videogamesPerPage;
     // const activeVideogames = videogames.slice(firstVideogameIndex,lastVideogameIndex);
 
+
     // function pagination (page) {
     //     setActivePage(page);
     // } 
@@ -23,10 +25,18 @@ export default function Videogames (){
         dispatch (fetchVideogames());        
     }, [dispatch]); //ejecuta accion cdo se monta el componente
     console.log(videogames);
+
+    // <Paginado
+    // videogamesPerPage={videogamesPerPage}
+    // videogames={videogames.length}
+    // pagination={pagination}
+    // />
+
     return (
         <div className= {style.container}>
             <ErrorComponent/>
-            {videogames && videogames.map((videogame) => (
+            {/* {activeVideogames && activeVideogames.map((videogame) => ( */}
+            {videogames && videogames.map((videogame) => ( 
                 <VideogameCard 
                 key={videogame.id} 
                 id={videogame.id}

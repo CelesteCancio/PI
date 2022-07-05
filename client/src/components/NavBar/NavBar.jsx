@@ -16,12 +16,13 @@ export default function NavBar (){
         <nav>
             <ul className={style.main}>
                 <li className={style.links}>
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to={'/home'}>Principal</NavLink>
+                    <NavLink style={{ textDecoration: 'none', color: 'white'}} to={'/home'}>Principal</NavLink>
                 </li>
+                <br/>
                 <li>
-                    <NavLink style={{ textDecoration: 'none', color: 'white'}}to={'/addVideogame'}>Agregar videojuego</NavLink>
+                    <NavLink style={{ textDecoration: 'none', color: 'white', fontSize:'14px'}}to={'/addVideogame'}>Agregar videojuego</NavLink>
                 </li>
-               
+
                 <li><BtnReload/></li>
               
             </ul>
