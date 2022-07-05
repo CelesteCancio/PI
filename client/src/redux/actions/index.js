@@ -8,14 +8,34 @@ export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 export const FILTER_BY_API = "FILTER_BY_API";
 export const FILTER_BY_DB = "FILTER_BY_DB";
 export const DBVIDEOGAMES_NOT_FOUND = "DBVIDEOGAMES_NOT_FOUND";
+export const VIDEOGAME_DETAIL_NOT_FOUND = "VIDEOGAME_DETAIL_NOT_FOUND";
+export const VIDEOGAMES_NOT_FOUND = "VIDEOGAMES_NOT_FOUND";
+export const VIDEOGAME_NOT_ADDED = "VIDEOGAMES_NOT_ADDED";
 export const SORT_AZ = "SORT_AZ";
 export const SORT_ZA = "SORT_ZA";
 export const SORT_BY_RATING_INC = "SORT_BY_RATING_INC";
 export const SORT_BY_RATING_DEC = "SORT_BY_RATING_DEC";
 
 
+
 export function addVideogame (videogame){
-    return {type: ADD_VIDEOGAME, payload: videogame};
+    //return {type: ADD_VIDEOGAME, payload: videogame};
+    console.log(videogame)
+    return function (dispatch){
+        return axios.post('http://localhost:3001/api/videogames',videogame)
+        .then((videogameResponse) => {
+            dispatch({
+                type: ADD_VIDEOGAME,
+                payload: videogameResponse.data
+            })
+        })
+        .catch((error) => {
+            dispatch({
+                type: VIDEOGAME_NOT_ADDED,
+                payload: `No se agregó el videojuego creado`
+            })
+        })
+    }
 }
 
 export function fetchVideogames (){
@@ -28,7 +48,10 @@ export function fetchVideogames (){
             })
         })
         .catch((error) => {
-            console.log(error);//hacer algo mas q consologuear
+            dispatch({
+                type: VIDEOGAMES_NOT_FOUND,
+                payload: `No se encontraron los videojuegos`
+            })
         })
     }
 }
@@ -43,7 +66,10 @@ export function searchVideogames (name){
             })
         })
         .catch((error) => {
-            console.log(error);//hacer algo mas q consologuear
+            dispatch({
+                type: VIDEOGAMES_NOT_FOUND,
+                payload: `No se encontraron los videojuegos`
+            })
         })
     }
 }
@@ -58,6 +84,12 @@ export function getVideogameDetail (id){
                 payload: videogameDetail
             })
         })
+        .catch((error) => {
+            dispatch({
+                type: VIDEOGAME_DETAIL_NOT_FOUND,
+                payload: "No se encontró el detalle del videojuego."
+            })
+        })
     }
 }
 
@@ -70,6 +102,9 @@ export function getGenres (){
                 type: GET_GENRES,
                 payload: genres.data
             })
+        })
+        .catch((error) => {
+            console.log(error);//hacer algo mas q consologuear
         })
     }
 }

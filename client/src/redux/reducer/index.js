@@ -1,7 +1,7 @@
-import axios from "axios";
 import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_VIDEOGAME_DETAIL, 
-    SEARCH_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_API, FILTER_BY_DB, DBVIDEOGAMES_NOT_FOUND,
-    SORT_AZ, SORT_ZA, SORT_BY_RATING_INC, SORT_BY_RATING_DEC } from "../actions";
+    SEARCH_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_API, FILTER_BY_DB, DBVIDEOGAMES_NOT_FOUND, 
+    VIDEOGAMES_NOT_FOUND, VIDEOGAME_DETAIL_NOT_FOUND, VIDEOGAME_NOT_ADDED, SORT_AZ, SORT_ZA, 
+    SORT_BY_RATING_INC, SORT_BY_RATING_DEC } from "../actions";
 
 const initialState = {
     videogames: [],    
@@ -16,7 +16,7 @@ export default function rootReducer (state = initialState, action){
         case ADD_VIDEOGAME:            
             return {
                 ...state,
-                videogames: [...state.videogames, action.payload], // videogames = [{},{},{}]                
+                videogames: [action.payload, ...state.videogames], // videogames = [{},{},{}]                
                 error:""
             }
         
@@ -77,6 +77,23 @@ export default function rootReducer (state = initialState, action){
                 videogames: [],
                 error: action.payload
             }       
+        case VIDEOGAMES_NOT_FOUND:
+            return {
+                ...state,
+                videogames: [],
+                error: action.payload
+            }   
+        case VIDEOGAME_NOT_ADDED:
+            return {
+                ...state,
+                error: action.payload
+            }               
+        case VIDEOGAME_DETAIL_NOT_FOUND:
+            return {
+                ...state,
+                videogameDetail: {},
+                error: action.payload
+            }                    
         case SORT_AZ:
             return {
                 ...state,
