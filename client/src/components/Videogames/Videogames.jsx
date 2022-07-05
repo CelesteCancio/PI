@@ -3,16 +3,28 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchVideogames } from "../../redux/actions";
 import ErrorComponent from "../ErrorComponent/ErrorComponent";
 import VideogameCard from "../VideogameCard/VideogameCard";
+import style from '../Videogames/videogames.module.css';
 
 export default function Videogames (){
     let videogames = useSelector( (state) => state.videogames); //mapStateToProps en clase    
     let dispatch = useDispatch(); 
+
+    // const [activePage, setActivePage] = useState (1); //siempre arranco en la 1ra
+    // const [videogamesPerPage, setVideogamesPerPage] = useState (15);
+    // const lastVideogameIndex = activePage * videogamesPerPage;
+    // const firstVideogameIndex = lastVideogameIndex - videogamesPerPage;
+    // const activeVideogames = videogames.slice(firstVideogameIndex,lastVideogameIndex);
+
+    // function pagination (page) {
+    //     setActivePage(page);
+    // } 
+
     useEffect (() => {
         dispatch (fetchVideogames());        
-    }, []); //ejecuta accion cdo se monta el componente
+    }, [dispatch]); //ejecuta accion cdo se monta el componente
     console.log(videogames);
     return (
-        <div>
+        <div className= {style.container}>
             <ErrorComponent/>
             {videogames && videogames.map((videogame) => (
                 <VideogameCard 
@@ -28,8 +40,3 @@ export default function Videogames (){
         </div>
     )
 }
-
-{/* <div key={videogame.id}>
-<h3>{videogame.name}</h3>
-<img src={videogame.image} alt={videogame.name}/>
-</div> */}

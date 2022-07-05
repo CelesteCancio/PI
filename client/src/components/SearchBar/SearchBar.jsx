@@ -18,6 +18,7 @@ export default function SearchBar (){
 
     return (
         <div>
+            <label>Buscá tu videojuego</label>
             <input type={'text'} name="search" value={state.search} onChange={(e) => handleChange(e)}/>
             <button onClick={(e) => handleClick(e)}>Buscar</button>
         </div>

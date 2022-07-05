@@ -1,12 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByGenre } from "../../redux/actions";
+import { useEffect } from "react";
+import { filterByGenre, getGenres } from "../../redux/actions";
 
 export default function BtnFilterGenre (){
 
     const [state, setState] = React.useState({genre:""});    
     let genres = useSelector( (state) => state.genres); //mapStateToProps en clase 
     let dispatch = useDispatch();
+
+    useEffect (() => {
+        dispatch (getGenres());
+    }, [dispatch]); //ejecuta accion cdo se monta el componente
 
     function handleChange (e){
         setState( (previousState) => ({...previousState, genre:e.target.value}));

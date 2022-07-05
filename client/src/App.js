@@ -21,9 +21,9 @@ function App() {
           <Route path={'/addVideogame'} component = {AddVideogame}></Route>
           <Route path={'/home'} component = {Videogames}></Route>
           <Route path={'/videogame/:id'} component = {VideogameDetail}></Route>      
-          <div className="App">
+          {/* <div className="App">
             <h1>Henry Videogames</h1>
-          </div>
+          </div> */}
         </React.Fragment>
       </Switch>  
     </React.Fragment>

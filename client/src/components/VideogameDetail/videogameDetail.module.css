@@ -1,0 +1,27 @@
+.cardH2 {
+    font-size: 20px;
+    color: black;
+}
+
+.cardH3 {
+    font-size: 16px;
+    color: darkgray;
+}
+
+.container {
+    border: double 5px darkgray;
+    border-radius: 5%;
+    background-color: lightgray;
+}
+
+.cardp {
+    font-size: 12px;
+    color: rgb(83, 81, 81);
+}
+
+.imgContainer {
+	background-color: lightgrey;
+	-moz-border-radius: 30%;
+	-webkit-border-radius: 30%;
+	border-radius: 30%;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getVideogameDetail } from "../../redux/actions";
+import styles from '../VideogameDetail/videogameDetail.module.css';
 
 class VideogameDetail extends React.Component {
 
@@ -10,14 +11,14 @@ class VideogameDetail extends React.Component {
 
     render(){
         return (
-            <div>    
-                <h2>Detalle de {this.props.videogameDetail.name}</h2>    
-                <img src={this.props.videogameDetail.image} alt={this.props.videogameDetail.name}/>
-                <p>{this.props.videogameDetail.description}</p>
-                <h3>{this.props.videogameDetail.genres && `Géneros: ${this.props.videogameDetail.genres.join(" - ")}`}</h3>
-                <h3>{`Rating: ${this.props.videogameDetail.rating}`}</h3>
-                <h3>{`Fecha de lanzamiento: ${this.props.videogameDetail.released}`}</h3>
-                <h3>{this.props.videogameDetail.platforms && `Plataformas: ${this.props.videogameDetail.platforms.join(", ")}`}</h3>    
+            <div className={styles.container}>    
+                <h2 className={styles.cardH2}>Detalle de {this.props.videogameDetail.name}</h2>    
+                <div className={styles.imgContainer}><img src={this.props.videogameDetail.image} alt={this.props.videogameDetail.name}/></div>
+                <p className={styles.cardp}>{this.props.videogameDetail.description}</p>
+                <h3 className={styles.cardH3}>{this.props.videogameDetail.genres && `Géneros: ${this.props.videogameDetail.genres.join(" - ")}`}</h3>
+                <h3 className={styles.cardH3}>{`Rating: ${this.props.videogameDetail.rating}`}</h3>
+                <h3 className={styles.cardH3}>{`Fecha de lanzamiento: ${this.props.videogameDetail.released}`}</h3>
+                <h3 className={styles.cardH3}>{this.props.videogameDetail.platforms && `Plataformas: ${this.props.videogameDetail.platforms.join(", ")}`}</h3>    
             </div> 
         )
     }

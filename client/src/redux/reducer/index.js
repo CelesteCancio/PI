@@ -17,7 +17,7 @@ export default function rootReducer (state = initialState, action){
             return {
                 ...state,
                 videogames: [action.payload, ...state.videogames], // videogames = [{},{},{}]                
-                error:""
+                error:action.payload
             }
         
         case FETCH_VIDEOGAMES:

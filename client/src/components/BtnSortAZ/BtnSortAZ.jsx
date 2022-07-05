@@ -21,7 +21,7 @@ export default function BtnSortAZ (){
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>
-                    Ordenar alfabéticamente
+                    Ordenar AZ - ZA
                     <select value={state.sort} onChange={(e) => handleChange(e)}>
                         <option>Seleccionar orden</option>
                         <option value="az">Ordenar A -`&GT;` Z</option>

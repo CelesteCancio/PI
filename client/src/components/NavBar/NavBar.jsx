@@ -6,6 +6,7 @@ import BtnFilterGenre from "../BtnFilterGenre/BtnFilterGenre";
 import BtnReload from "../BtnReload/BtnReload";
 import BtnSortAZ from "../BtnSortAZ/BtnSortAZ";
 import BtnSortRating from "../BtnSortRating/BtnSortRating";
+import style from "../NavBar/navBar.module.css";
 
 export default function NavBar (){    
 
@@ -13,19 +14,23 @@ export default function NavBar (){
     //let [input, setInput] = React.useState ({name: "", lastName: ""});
     return (
         <nav>
+            <ul className={style.main}>
+                <li className={style.links}>
+                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to={'/home'}>Principal</NavLink>
+                </li>
+                <li>
+                    <NavLink style={{ textDecoration: 'none', color: 'white'}}to={'/addVideogame'}>Agregar videojuego</NavLink>
+                </li>
+               
+                <li><BtnReload/></li>
+              
+            </ul>
             <ul>
-                <li>
-                    <NavLink to={'/home'}>Principal</NavLink>
-                </li>
-                <li>
-                    <NavLink to={'/addVideogame'}>Agregar videojuego</NavLink>
-                </li>
                 <li><BtnFilterGenre/></li>
                 <li><BtnFilterOrigin/></li>
                 <li><BtnSortAZ/></li>
                 <li><BtnSortRating/></li>
-                <li><BtnReload/></li>
-                <li><SearchBar/></li>                
+                <li><SearchBar/></li>  
             </ul>
         </nav>
     )

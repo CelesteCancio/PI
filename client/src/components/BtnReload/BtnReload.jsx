@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { fetchVideogames } from "../../redux/actions";
+import style from '../BtnReload/btnReload.module.css';
 
 export default function BtnReload (){
 
@@ -8,6 +9,6 @@ export default function BtnReload (){
         dispatch (fetchVideogames());
     }
     return (
-        <button onClick={(e) => handleClick()}>Recargar videojuegos</button>
+        <button className={style.btnMain} onClick={(e) => handleClick()}>Recargar videojuegos</button>
     )
 }

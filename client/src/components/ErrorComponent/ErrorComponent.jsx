@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import style from "../ErrorComponent/errorComponent.module.css"
 
 export default function ErrorComponent (){
 
@@ -6,8 +7,8 @@ export default function ErrorComponent (){
     
     if(error){
         return (
-            <div>
-                {`Hubo un error! ${error}`}
+            <div className={style.main}>
+                {<h4>Hubo un error! {error}</h4>}
             </div>
         )
     }
