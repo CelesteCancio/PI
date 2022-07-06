@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector }  from 'react-redux';
-import { addVideogame, getGenres, fetchVideogames } from "../../redux/actions";
+import { addVideogame, getGenres, getPlatforms, fetchVideogames } from "../../redux/actions";
 import style from '../AddVideogame/addVideogame.module.css';
 
 function validate (values){    
@@ -53,7 +53,7 @@ export default function AddVideogame (){
 
     useEffect (() => {
         dispatch (getGenres());
-        //dispatch (fetchVideogames());
+        dispatch (getPlatforms());
     }, [dispatch]); //ejecuta accion cdo se monta el componente
 
 
@@ -97,9 +97,10 @@ export default function AddVideogame (){
     return (
         <React.Fragment>
             <div className= {style.main}>
-            <div className= {style.title}><h1>Agregar videojuego</h1></div>
+            
             <br/>   
             <form className= {style.formulario} onSubmit={(e) => handleSubmit(e)}>
+                <div className= {style.title}><h3>Agregá tu videojuego!</h3></div>
                 <div>
                     <label>Nombre</label>
                     <input type={'text'} name="name" value={state.name} onChange={(e) => handleChange(e)}></input>

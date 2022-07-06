@@ -4,6 +4,7 @@ export const FETCH_VIDEOGAMES = 'FETCH_VIDEOGAMES';
 export const SEARCH_VIDEOGAMES = 'SEARCH_VIDEOGAMES';
 export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAME_DETAIL';
 export const GET_GENRES = "GET_GENRES";
+export const GET_PLATFORMS = "GET_PLATFORMS";
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
 export const FILTER_BY_API = "FILTER_BY_API";
 export const FILTER_BY_DB = "FILTER_BY_DB";
@@ -101,6 +102,22 @@ export function getGenres (){
             dispatch({
                 type: GET_GENRES,
                 payload: genres.data
+            })
+        })
+        .catch((error) => {
+            console.log(error);//hacer algo mas q consologuear
+        })
+    }
+}
+
+export function getPlatforms (){
+    return function (dispatch){
+        console.log(`en get Platforms`);
+        return axios.get(`http://localhost:3001/api/videogames/platforms`)
+        .then(platforms => {
+            dispatch({
+                type: GET_PLATFORMS,
+                payload: platforms.data
             })
         })
         .catch((error) => {

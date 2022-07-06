@@ -1,4 +1,4 @@
-import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_VIDEOGAME_DETAIL, 
+import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, 
     SEARCH_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_API, FILTER_BY_DB, DBVIDEOGAMES_NOT_FOUND, 
     VIDEOGAMES_NOT_FOUND, VIDEOGAME_DETAIL_NOT_FOUND, VIDEOGAME_NOT_ADDED, SORT_AZ, SORT_ZA, 
     SORT_BY_RATING_INC, SORT_BY_RATING_DEC } from "../actions";
@@ -21,13 +21,13 @@ export default function rootReducer (state = initialState, action){
             }
         
         case FETCH_VIDEOGAMES:
-            let platformsAux = [];
-            action.payload.forEach(videogame => videogame.platforms.forEach(platform => {
-                if (!platformsAux.includes(platform)) platformsAux.push(platform)}));
+            // let platformsAux = [];
+            // action.payload.forEach(videogame => videogame.platforms.forEach(platform => {
+            //     if (!platformsAux.includes(platform)) platformsAux.push(platform)}));
             return {
                 ...state,
                 videogames: action.payload,
-                platforms: [...platformsAux],
+                // platforms: [...platformsAux],
                 error:""
             }
 
@@ -50,7 +50,14 @@ export default function rootReducer (state = initialState, action){
                 ...state,
                 genres: action.payload,
                 error:""
-            }      
+            }    
+        
+        case GET_PLATFORMS:
+            return {
+                ...state,
+                platforms: action.payload,
+                error:""
+            }            
            
         case FILTER_BY_GENRE:
             return {
