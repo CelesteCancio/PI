@@ -40,10 +40,11 @@ router.get('/fromDB', (req,res) => {
 });
 
 router.post('/', async (req,res) => {
-
+   
     try {
-        const addedVideogame = await addVideogame({...req.body});
-        return res.json(addedVideogame);
+        const addedVideogame = await addVideogame({...req.body});  
+        //console.log(addedVideogame);        
+        return res.send("Videojuego agregado correctamente");
     } catch (error) {
         return res.send(error);
     }

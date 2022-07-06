@@ -40,7 +40,7 @@ async function getVideogameByIdFromAPI (id){
             name: foundVideogameByIdComplete.name,             
             image: foundVideogameByIdComplete["background_image"],
             genres: foundVideogameByIdComplete.genres.map (genre => genre.name),
-            description: foundVideogameByIdComplete.description,
+            description: foundVideogameByIdComplete["description_raw"],
             platforms: foundVideogameByIdComplete.platforms.map (p => p.platform.name),
             rating: foundVideogameByIdComplete.rating,
             released: foundVideogameByIdComplete.released

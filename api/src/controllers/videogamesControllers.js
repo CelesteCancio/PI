@@ -83,7 +83,10 @@ async function getAllVideogamesFromDB (){
         const foundVideogames = foundVideogamesComplete.map(foundVideogame => ({
             name: foundVideogame.name,
             image: foundVideogame.image,
-            genres: foundVideogame.Genres.map (genre => genre.name)
+            genres: foundVideogame.Genres.map (genre => genre.name),
+            rating: foundVideogame.rating,
+            id: foundVideogame.id,
+            platforms: foundVideogame.platforms
         }));        
         return foundVideogames;        
     } catch (error) {
@@ -156,14 +159,26 @@ async function getVideogamesByNameFromDB (name){
 //ANDA OK
 async function addVideogame (videogame){
     const genresId = videogame.genresId; //tiene q ser un arreglo y llamarse igual en el envio de info desde front
+    console.log(genresId);
+    console.log(typeof genresId[0]);
     try {
-        const newVideogame = await Videogame.create({...videogame});
-        await newVideogame.addGenre (genresId);    
-        return newVideogame;
+        const newVideogame = await Videogame.create({...videogame});        
+        const game = await Videogame.findByPk(newVideogame.dataValues.id);
+        await game.addGenres (genresId);   
+        return "ok";
     } catch (error) {
         throw new Error (`No se pudo agregar el videojuego la base de datos, ${error}`);
     }
 }
+
+// async function addGenresToVideogame (createdVideogame,arrayGenres){
+//     try {
+//         const game = await Videogame.findByPk(createdVideogame.id);
+//         await game.addGenres (arrayGenres);
+//     } catch (error) {
+//         throw new Error (`No se pudieron agregar los generos al videojuego, ${error}`);
+//     }
+// }
 
 
 //ORDENAR ALFABETICAMENTE. No ordena un pomelo. Y no quiero hacer otra llamada a la API, no deberia hacerlo en la misma ruta con otro query?
