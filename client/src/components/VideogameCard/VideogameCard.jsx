@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import styles from '../VideogameCard/videogameCard.module.css'
 
-export default function VideogameCard ({id, name, image, genres, rating}){
+export default function VideogameCard ({id, name, image, genres, rating}){ //loading tb?
     return (
         <Link to={`/videogame/${id}`}>
             <div key={id} className={styles.container}>            
