@@ -12,7 +12,7 @@ export default function Videogames (){
 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [videogamesPerPage, setVideogamesPerPage] = useState(10);
+    const [videogamesPerPage, setVideogamesPerPage] = useState(15);
 
 
     useEffect (() => {
@@ -31,11 +31,12 @@ export default function Videogames (){
     } 
 
     return (
-        <div className= {style.container}>
+        <div>
+            <ErrorComponent/> 
             <Pagination videogamesPerPage={videogamesPerPage} totalVideogames = {videogames.length} paginate = {paginate}/>
-            <ErrorComponent/>            
+                       
             
-
+            <div className= {style.container}>
             {/* {videogames && videogames.map((videogame) => (  */}
             {currentVideogames && currentVideogames.map((videogame) => ( 
                 <VideogameCard 
@@ -48,7 +49,7 @@ export default function Videogames (){
                 />
 
             ))}
-
+            </div>
         </div>
     )
 }
