@@ -171,33 +171,25 @@ async function addVideogame (videogame){
     }
 }
 
-// async function addGenresToVideogame (createdVideogame,arrayGenres){
-//     try {
-//         const game = await Videogame.findByPk(createdVideogame.id);
-//         await game.addGenres (arrayGenres);
-//     } catch (error) {
-//         throw new Error (`No se pudieron agregar los generos al videojuego, ${error}`);
-//     }
-// }
 
+async function getPlatforms (){
+    try {
+        const videogames = await getAllVideogamesFromAPI ();
+        let platforms = [];
+        videogames.forEach(videogame => videogame.platforms.forEach(platform => {
+                    if (!platforms.includes(platform)) platforms.push(platform)
+                }));
+        return platforms;
+    } catch (error) {
+        throw new Error (`No se pudieron obtener las plataformas, ${error}`);
+    }
 
-//ORDENAR ALFABETICAMENTE. No ordena un pomelo. Y no quiero hacer otra llamada a la API, no deberia hacerlo en la misma ruta con otro query?
-async function sortVideogamesByRating (){
-//     try {
-//         const videogames = await getVideogames();
-//         const sortedVideogames = videogames.map(videogame => videogame.sort((a,b) => {
-//             return a.rating > b.rating;
-//         }));
-//         return sortedVideogames;
-//     } catch (error) {
-//         return `No se pudieron obtener los videojuegos para ordenarlos por rating`;
-//     }
 }
 
 module.exports = { 
     getVideogames,
     addVideogame,
-    sortVideogamesByRating,
     getAllVideogamesFromAPI,
-    getAllVideogamesFromDB
+    getAllVideogamesFromDB,
+    getPlatforms
  }

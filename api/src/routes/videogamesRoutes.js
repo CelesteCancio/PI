@@ -1,5 +1,5 @@
 const {Router} = require ("express");
-const {getVideogames, addVideogame, sortVideogamesByRating, getAllVideogamesFromAPI, getAllVideogamesFromDB} = require ("../controllers/videogamesControllers");
+const {getVideogames, addVideogame, getAllVideogamesFromAPI, getAllVideogamesFromDB, getPlatforms} = require ("../controllers/videogamesControllers");
 
 
 const router = Router();
@@ -50,15 +50,16 @@ router.post('/', async (req,res) => {
     }
 });
 
-//Ruta de prueba para ordenar por rating
-router.get('/sortbyrating', (req,res) => {    
-    console.log(`en '/sortbyrating'`);
+
+//Ruta para traer las plataformas
+router.get('/platforms',(req,res) => {
     try {
-        return sortVideogamesByRating().then(videogames => 
-            res.json(videogames));
+        getPlatforms().then(platforms => 
+            typeof platforms === "object" ? res.json(platforms) : res.status(404).json(platforms));
     } catch (error) {
         return res.send(error);
     }
+
 });
 
 
