@@ -129,7 +129,7 @@ export default function rootReducer (state = initialState, action){
             console.log(`sort by date inc`);
             return {
                 ...state,
-                videogames: [...state.videogames.sort((a,b) => (a.released - b.released ))],
+                videogames: [...state.videogames.sort((a,b) => (parseInt(a.released.slice(0,4)) - parseInt(b.released.slice(0,4))))],
                 error: ""
             } 
         case SORT_BY_DATE_DEC:
