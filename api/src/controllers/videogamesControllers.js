@@ -55,6 +55,7 @@ async function getAllVideogamesFromAPI (){
                 rating: videogame.rating,
                 id: videogame.id,
                 platforms: videogame.platforms.map (p => p.platform.name),
+                released: videogame.released,
             }));
             console.log(videogames20[0]);
             videogames100 = [...videogames100, ...videogames20];           
@@ -77,7 +78,8 @@ async function getAllVideogamesFromDB (){
             genres: foundVideogame.Genres.map (genre => genre.name),
             rating: foundVideogame.rating,
             id: foundVideogame.id,
-            platforms: foundVideogame.platforms
+            platforms: foundVideogame.platforms,
+            released: foundVideogame.released,
         }));        
         return foundVideogames;        
     } catch (error) {
