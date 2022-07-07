@@ -39,16 +39,7 @@ async function getAllVideogamesFromAPI (){
         //    name: videogame.name,             
         //     image: videogame["background_image"],
         //     genres: videogame.genres.map (genre => genre.name)
-        // })))
-                
-        //ASI SI, pero trae solo 20 xq es un solo llamado
-        // let videogamesComplete = (await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)).data.results; 
-        // let videogames = videogamesComplete.map(videogame => ({
-        //     name: videogame.name,             
-        //     image: videogame["background_image"],
-        //     genres: videogame.genres.map (genre => genre.name)
-        // }));
-        // return videogames;        
+        // })))     
 
         console.log(`estoy en getAllvdFromAPI`)
         let URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
@@ -134,7 +125,7 @@ async function getVideogamesByNameFromAPI (name){
         }
 }
 
-//ANDA OK: pero trae todo, no solo lo q quiere el front
+//ANDA OK
 async function getVideogamesByNameFromDB (name){
     
     try {
@@ -151,8 +142,6 @@ async function getVideogamesByNameFromDB (name){
     }
 
 }
-
-
 
 
 //Ruta POST, agregar videojuego a la DB

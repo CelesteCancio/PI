@@ -29,10 +29,10 @@ async function getVideogameByIdFromAPI (id){
     try {
         console.log(`en getVideogamesByIdFromAPI, id ${id}`);
 
-        //si anda:
+
         let foundVideogameByIdComplete = (await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data;         
         console.log(foundVideogameByIdComplete);
-        // si anda:
+        // tb anda:
         // let foundVideogameByIdComplete = axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
         // .then(response => response.data);
 

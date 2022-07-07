@@ -27,8 +27,7 @@ module.exports = (sequelize) => {
     platforms: {      
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
-    },
-    //Preguntar si esta bien incluir esto ya q en el Readme no esta, pero es necesario para el front ruta ppal
+    },    
     image: {
       type: DataTypes.STRING
     }

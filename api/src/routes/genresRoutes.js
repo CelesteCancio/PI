@@ -28,8 +28,7 @@ router.get('/', (req,res) => {
     }
 });
 
-//creo genres solo para ver si funciona el add. BORRAR ANTES DE ENTREGAR
-
+//creo genres solo para ver si funciona el add. SOLO DE PRUEBA
 router.post('/', async (req,res) => {
     const {id, name} = req.body;
     try {
