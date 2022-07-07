@@ -1,7 +1,7 @@
 import { ADD_VIDEOGAME, FETCH_VIDEOGAMES, GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, 
     SEARCH_VIDEOGAMES, FILTER_BY_GENRE, FILTER_BY_API, FILTER_BY_DB, DBVIDEOGAMES_NOT_FOUND, 
     VIDEOGAMES_NOT_FOUND, VIDEOGAME_DETAIL_NOT_FOUND, VIDEOGAME_NOT_ADDED, SORT_AZ, SORT_ZA, 
-    SORT_BY_RATING_INC, SORT_BY_RATING_DEC } from "../actions";
+    SORT_BY_RATING_INC, SORT_BY_RATING_DEC, SORT_BY_DATE_INC, SORT_BY_DATE_DEC } from "../actions";
 
 const initialState = {
     videogames: [],    
@@ -124,7 +124,21 @@ export default function rootReducer (state = initialState, action){
                 ...state,
                 videogames: [...state.videogames.sort((a,b) => (b.rating - a.rating ))],
                 error: ""
-            }             
+            }     
+        case SORT_BY_DATE_INC:
+            console.log(`sort by date inc`);
+            return {
+                ...state,
+                videogames: [...state.videogames.sort((a,b) => (a.released - b.released ))],
+                error: ""
+            } 
+        case SORT_BY_DATE_DEC:
+            console.log(`sort by date dec`);
+            return {
+                ...state,
+                videogames: [...state.videogames.sort((a,b) => (b.released - a.released ))],
+                error: ""
+            }                
         default: return {...state}
     }
 

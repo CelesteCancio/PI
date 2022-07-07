@@ -6,6 +6,7 @@ import BtnFilterGenre from "../BtnFilterGenre/BtnFilterGenre";
 import BtnReload from "../BtnReload/BtnReload";
 import BtnSortAZ from "../BtnSortAZ/BtnSortAZ";
 import BtnSortRating from "../BtnSortRating/BtnSortRating";
+import BtnSortDate from "../BtnSortDate/BtnSortDate";
 import style from "../NavBar/navBar.module.css";
 
 export default function NavBar (){    
@@ -36,6 +37,7 @@ export default function NavBar (){
                 <li><BtnFilterOrigin/></li>
                 <li><BtnSortAZ/></li>
                 <li><BtnSortRating/></li>
+                <li><BtnSortDate/></li>
                 <li><SearchBar/></li>  
             </ul>
         </nav>

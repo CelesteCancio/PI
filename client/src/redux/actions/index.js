@@ -16,6 +16,8 @@ export const SORT_AZ = "SORT_AZ";
 export const SORT_ZA = "SORT_ZA";
 export const SORT_BY_RATING_INC = "SORT_BY_RATING_INC";
 export const SORT_BY_RATING_DEC = "SORT_BY_RATING_DEC";
+export const SORT_BY_DATE_INC = "SORT_BY_DATE_INC";
+export const SORT_BY_DATE_DEC = "SORT_BY_DATE_DEC";
 
 
 
@@ -193,6 +195,21 @@ export function sortByRating (sort){
     else{
         return {
             type: SORT_BY_RATING_DEC,
+            payload: ""
+        }
+    }
+}
+
+export function sortByDate (sort){
+    console.log(`sort by date action creator`);
+    if(sort==='increasing')
+    return {
+        type: SORT_BY_DATE_INC,
+        payload: ""
+    }
+    else{
+        return {
+            type: SORT_BY_DATE_DEC,
             payload: ""
         }
     }
