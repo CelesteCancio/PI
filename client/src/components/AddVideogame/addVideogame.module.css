@@ -91,3 +91,7 @@ input[type=number] {
     background-color: rgb(94, 159, 94);
     font-weight: bolder; 
   }
+
+  .selectGandP {
+    height: 150px;
+  }

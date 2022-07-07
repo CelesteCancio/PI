@@ -44,14 +44,18 @@ export default function rootReducer (state = initialState, action){
         case GET_GENRES:
             return {
                 ...state,
-                genres: action.payload,
+                genres: action.payload.sort(function(a,b){return (
+                    a.name<b.name ? -1 : (a.name>b.name) ? 1 : 0
+                    )}),
                 error:""
             }    
         
         case GET_PLATFORMS:
             return {
                 ...state,
-                platforms: action.payload,
+                platforms: action.payload.sort(function(a,b){return (
+                    a.name<b.name ? -1 : (a.name>b.name) ? 1 : 0
+                    )}),
                 error:""
             }            
            
