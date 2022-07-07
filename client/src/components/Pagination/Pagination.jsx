@@ -14,7 +14,7 @@ const Pagination = ({videogamesPerPage, totalVideogames, paginate}) => {
     <div className= {style.center}>
       <div className= {style.pagination}>
         {pageNumbers && pageNumbers.map(num => (
-          <a onClick = {() => paginate (num)}>{num}</a> 
+          <a key={num} onClick = {() => paginate (num)}>{num}</a> 
           ))}
       </div>
     </div>
@@ -23,10 +23,3 @@ const Pagination = ({videogamesPerPage, totalVideogames, paginate}) => {
 
 export default Pagination;
 
-        {/* <ul>
-          {pageNumbers && pageNumbers.map(num => (
-            <li key={num} className= {style.item}> 
-              <a className= {style.link} onClick = {() => paginate (num)}>{num}</a> 
-            </li>
-          ))}
-        </ul> */}

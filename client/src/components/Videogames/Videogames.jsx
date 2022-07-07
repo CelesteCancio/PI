@@ -12,13 +12,11 @@ export default function Videogames (){
 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+    const [videogamesPerPage] = useState(15);
 
 
-    useEffect (() => {
-        
-        dispatch (fetchVideogames());        
-        
+    useEffect (() => {        
+        dispatch (fetchVideogames());             
     }, [dispatch]); //ejecuta accion cdo se monta el componente
     console.log(videogames);
 
@@ -36,8 +34,7 @@ export default function Videogames (){
             <Pagination videogamesPerPage={videogamesPerPage} totalVideogames = {videogames.length} paginate = {paginate}/>
                        
             
-            <div className= {style.container}>
-            {/* {videogames && videogames.map((videogame) => (  */}
+            <div className= {style.container}>            
             {currentVideogames && currentVideogames.map((videogame) => ( 
                 <VideogameCard 
                 key={videogame.id} 

@@ -26,8 +26,6 @@ class VideogameDetail extends React.Component {
     }
 }
 
-
-
 function mapStateToProps(state){
     return {
         videogameDetail: state.videogameDetail

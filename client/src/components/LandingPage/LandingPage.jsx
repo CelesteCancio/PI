@@ -1,16 +1,9 @@
-import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getGenres } from "../../redux/actions";
 import style from "../LandingPage/landingPage.module.css"
 
 
 export default function LandingPage (){
-        
-    let dispatch = useDispatch();
-    // useEffect (() => {
-    //     dispatch (getGenres());
-    // }, [dispatch]); //ejecuta accion cdo se monta el componente
 
     return (
         <div className={style.background}>

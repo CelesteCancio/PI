@@ -10,8 +10,13 @@ import style from "../NavBar/navBar.module.css";
 
 export default function NavBar (){    
 
-    //si tuviera un estado local:
-    //let [input, setInput] = React.useState ({name: "", lastName: ""});
+    const myStyle = {
+        color: "black",
+        fontFamily: "Verdana",
+        textDecoration: 'none',
+        fontSize:'14px',
+        fontWeight: "bold"
+    }
     return (
         <nav>
             <ul className={style.main}>
@@ -20,7 +25,7 @@ export default function NavBar (){
                 </li>
                 <br/>
                 <li>
-                    <NavLink style={{ textDecoration: 'none', color: 'white', fontSize:'14px'}}to={'/addVideogame'}>Agregar videojuego</NavLink>
+                    <NavLink style={myStyle} to={'/addVideogame'}>Agregar videojuego</NavLink>
                 </li>
 
                 <li><BtnReload/></li>

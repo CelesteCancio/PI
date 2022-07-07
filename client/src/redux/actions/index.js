@@ -24,11 +24,14 @@ export function addVideogame (videogame){
     console.log(videogame)
     return function (dispatch){
         return axios.post('http://localhost:3001/api/videogames',videogame)
+        // .then((videogameResponse) => {
+        //     dispatch({
+        //         type: ADD_VIDEOGAME,
+        //         payload: videogameResponse.data
+        //     })
+        // })
         .then((videogameResponse) => {
-            dispatch({
-                type: ADD_VIDEOGAME,
-                payload: videogameResponse.data
-            })
+            alert("Acá podés visualizar tu nuevo videojuego");
         })
         .catch((error) => {
             dispatch({
@@ -105,7 +108,7 @@ export function getGenres (){
             })
         })
         .catch((error) => {
-            console.log(error);//hacer algo mas q consologuear
+            console.log(error);
         })
     }
 }
@@ -121,7 +124,7 @@ export function getPlatforms (){
             })
         })
         .catch((error) => {
-            console.log(error);//hacer algo mas q consologuear
+            console.log(error);
         })
     }
 }
@@ -144,7 +147,7 @@ export function filterByOrigin (origin){
                 })
             })
             .catch((error) => {
-                console.log(error);//hacer algo mas q consologuear
+                console.log(error);
             })
         }
     }

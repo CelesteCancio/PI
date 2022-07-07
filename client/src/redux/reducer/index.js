@@ -21,13 +21,9 @@ export default function rootReducer (state = initialState, action){
             }
         
         case FETCH_VIDEOGAMES:
-            // let platformsAux = [];
-            // action.payload.forEach(videogame => videogame.platforms.forEach(platform => {
-            //     if (!platformsAux.includes(platform)) platformsAux.push(platform)}));
             return {
                 ...state,
                 videogames: action.payload,
-                // platforms: [...platformsAux],
                 error:""
             }
 
