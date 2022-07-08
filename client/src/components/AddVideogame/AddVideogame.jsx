@@ -64,8 +64,9 @@ export default function AddVideogame (){
             }
         }
 
-        if (state.genresId.includes(selectedGenreObject.valueGenre)){            
-            setState( {...state, genresId:[...state.genresId.filter(g => g !== selectedGenreObject.valueGenre)]});
+        if (state.genresId.includes(selectedGenreObject.valueGenre)){    
+            //console.log(`en if includes ${selectedGenreObject.valueGenre}`);        
+                setState( {...state, genresId:[...state.genresId.filter(g => g !== selectedGenreObject.valueGenre)]});
                 setError(validate( {...state, genresId:[...state.genresId.filter(g => g !== selectedGenreObject.valueGenre)]})); 
         }
         else{

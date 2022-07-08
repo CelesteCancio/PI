@@ -21,11 +21,11 @@ export default function BtnSortDate (){
         <div>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>
-                    Ordenar por fecha
+                    Ordenar por año
                     <select value={state.sort} onChange={(e) => handleChange(e)}>
                         <option>Seleccionar orden</option>
-                        <option value="increasing">Mayor a menor fecha</option>
-                        <option value="decreasing">Menor a mayor fecha</option>                               
+                        <option value="increasing">Mayor a menor año</option>
+                        <option value="decreasing">Menor a mayor año</option>                               
                     </select>
                 </label>
                 <input type="submit" value="Ordenar" />
