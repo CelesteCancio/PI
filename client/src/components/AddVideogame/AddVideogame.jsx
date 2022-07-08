@@ -33,13 +33,13 @@ export default function AddVideogame (){
 
     function validate ({name, description, rating, image, genresId, platforms}){    
         const errorsObject = {};        
-        //let regexWhiteSpace = "^\s*$";
-        //let urlRegex = "[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)";
-        if (!name) errorsObject.name = "El nombre no puede estar vacío";        
+        
+        if ( /^\s/.test(name) ) errorsObject.name = "El nombre no puede comenzar con espacio";  
+        if (!name) errorsObject.name = "El nombre no puede estar vacío";                  
         if (!description) errorsObject.description = "La descripción no puede estar vacía";
         if (description && description.length<5) errorsObject.description = "La descripción debe contener más de 5 caracteres";
         if (rating<0 || rating>5) errorsObject.rating = "El rating debe estar entre 0 y 5";                
-        //if (!urlRegex.test(image)) errorsObject.image = "Ingrese URL válida";  
+        if (image && !/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(image)) errorsObject.image = "Ingrese URL válida";  
         if (genresId.length === 0) errorsObject.genresId = "Debe elegir al menos un género";
         if (platforms.length === 0) errorsObject.platforms = "Debe elegir al menos una plataforma";  
             
