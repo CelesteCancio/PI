@@ -45,20 +45,40 @@ export function addVideogame (videogame){
 }
 
 export function fetchVideogames (){
-    return function (dispatch){
-        return axios.get('http://localhost:3001/api/videogames')
-        .then((videogames) => {
-            dispatch({
-                type: FETCH_VIDEOGAMES,
-                payload: videogames.data
-            })
-        })
-        .catch((error) => {
-            dispatch({
-                type: VIDEOGAMES_NOT_FOUND,
-                payload: `No se encontraron los videojuegos`
-            })
-        })
+    // return function (dispatch){
+    //     return axios.get('http://localhost:3001/api/videogames')
+    //     .then((videogames) => {
+    //         dispatch({
+    //             type: FETCH_VIDEOGAMES,
+    //             payload: videogames.data
+    //         })
+    //     })
+    //     .catch((error) => {
+    //         dispatch({
+    //             type: VIDEOGAMES_NOT_FOUND,
+    //             payload: `No se encontraron los videojuegos`
+    //         })
+    //     })
+    // }
+
+    return async function (dispatch){
+        
+        
+            try {
+                const videogames = await axios.get('http://localhost:3001/api/videogames');
+                return (
+                dispatch({
+                    type: FETCH_VIDEOGAMES,
+                    payload: videogames.data
+                })
+                )
+            } catch (error) {
+                return (
+                dispatch({
+                    type: VIDEOGAMES_NOT_FOUND,
+                    payload: `No se encontraron los videojuegos`
+                }))
+            }          
     }
 }
 
