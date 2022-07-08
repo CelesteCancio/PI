@@ -33,18 +33,14 @@ export default function AddVideogame (){
 
     function validate ({name, description, rating, image, genresId, platforms}){    
         const errorsObject = {};        
-        if (!name) errorsObject.name = "El nombre no puede estar vacío";
+        //let regexWhiteSpace = "^\s*$";
+        //let urlRegex = "[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)";
+        if (!name) errorsObject.name = "El nombre no puede estar vacío";        
         if (!description) errorsObject.description = "La descripción no puede estar vacía";
         if (description && description.length<5) errorsObject.description = "La descripción debe contener más de 5 caracteres";
-        if (rating<0 || rating>5) errorsObject.rating = "El rating debe estar entre 0 y 5";        
-        //if (genresId.length === 0) errorsObject.genresId = "Debe elegir al menos un género";
-    
+        if (rating<0 || rating>5) errorsObject.rating = "El rating debe estar entre 0 y 5";                
+        //if (!urlRegex.test(image)) errorsObject.image = "Ingrese URL válida";  
         if (genresId.length === 0) errorsObject.genresId = "Debe elegir al menos un género";
-        // if(state.genresId.includes(genresId.valueGenre)){
-        //     errorsObject.genresId = `El género ${genresId.nameGenre} ya fue seleccionado`;
-
-        // } 
-    
         if (platforms.length === 0) errorsObject.platforms = "Debe elegir al menos una plataforma";  
             
         return errorsObject;
@@ -55,35 +51,22 @@ export default function AddVideogame (){
         setState( {...state, [e.target.name]:e.target.value});
         setError(validate( {...state, [e.target.name]:e.target.value}));  
     };
+    
 
-
-    function handleSelectGenre (e) {
-        setState( {...state, genresId:[parseInt(e.target.value)]});        
-        setError(validate( {...state, genresId:[e.target.value]}));         
-     }
-     
-
-     function showSelectedGenres (e) {
+     function handleSelectGenre (e) {
         let optionsArray = e.target.options;
-        //let selectedOptions = [];
-        console.log(optionsArray);
         let selectedGenreObject = {};
 
         for (let i=0; i<optionsArray.length; i++){
-            if (optionsArray[i].selected){
-                //selectedOptions.push(optionsArray[i].value);
-                console.log(optionsArray[i]);                
+            if (optionsArray[i].selected){    
                 selectedGenreObject.nameGenre = optionsArray[i].innerText;
-                //console.log(nameGenre);
-                selectedGenreObject.valueGenre = optionsArray[i].value;
-                //console.log(valueGenre);
-                console.log(selectedGenreObject);
-                //return selectedGenreObject;
+                selectedGenreObject.valueGenre = optionsArray[i].value;         
             }
         }
 
-        if (state.genresId.includes(selectedGenreObject.valueGenre)){
-            alert(`El género ${selectedGenreObject.nameGenre} ya fue seleccionado`)
+        if (state.genresId.includes(selectedGenreObject.valueGenre)){            
+            setState( {...state, genresId:[...state.genresId.filter(g => g !== selectedGenreObject.valueGenre)]});
+                setError(validate( {...state, genresId:[...state.genresId.filter(g => g !== selectedGenreObject.valueGenre)]})); 
         }
         else{
             if (state.genresId.length<=2){
@@ -91,67 +74,46 @@ export default function AddVideogame (){
                 setError(validate( {...state, genresId:[...state.genresId,selectedGenreObject.valueGenre]})); 
             }
             else{
-                //alert(`No se pueden elegir mas de 3 géneros`)
-                setState( {...state, genresId:[...(state.genresId.slice(1)),selectedGenreObject.valueGenre]});
-                setError(validate( {...state, genresId:[...(state.genresId.slice(1)),selectedGenreObject.valueGenre]})); 
+                alert(`No se pueden elegir mas de 3 géneros`)                
             }                
         } 
-        //setState( {...state, genresId:[...state.genresId,selectedGenreObject.valueGenre]});
-        
-        //setError(validate( {...state, genresId: selectedGenreObject})); 
-        //setError(validate( {...state, genresId:[...state.genresId,selectedGenreObject.valueGenre]})); 
-
-
-        // if(!state.genresId.includes(selectedGenreObject.valueGenre)){
-        //     setState( {...state, genresId:[...state.genresId,selectedGenreObject.valueGenre]});
-        // }
-        // else{
-
-        // }
-
-        // console.log(selectedOptions);
-        //console.log(e.target);
-        //console.log(e.target.options);
-        //console.log(e.target.selectedIndex);
-        //setState( {...state, genresId:[... state.genresId, parseInt(e.target.options.selected.value)]});        
-        //setError(validate( {...state, genresId:[... state.genresId, parseInt(e.target.options.selected.value)]}));    
-      
-        // const optionGenres = Array.from(e.target.options)
-        // console.log (optionGenres);
-        // const selectedGenres = optionGenres.filter(o => o.selected).map(o => o.value)
-        // console.log (selectedGenres);
-      
     }
 
+        function handleSelectPlatform (e) {
+            let optionsArray = e.target.options; 
+            let selectedPlatform = "";
+    
+            for (let i=0; i<optionsArray.length; i++){
+                if (optionsArray[i].selected){                                        
+                    selectedPlatform = optionsArray[i].value;  
+                }
+            }
+    
+            if (state.platforms.includes(selectedPlatform)){
+                setState( {...state, platforms:[...state.platforms.filter(g => g !== selectedPlatform)]});
+                setError(validate( {...state, platforms:[...state.platforms.filter(g => g !== selectedPlatform)]}));                               
+            }
+            else{
+                if (state.platforms.length<=3){
+                    setState( {...state, platforms:[...state.platforms,selectedPlatform]});
+                    setError(validate( {...state, platforms:[...state.platforms,selectedPlatform]})); 
+                }
+                else{
+                    alert(`No se pueden elegir mas de 4 plataformas`)                    
+                }                
+            } 
+    }
 
+  
+    // function handleSelectGenre (e) {
+    //     setState( {...state, genresId:[parseInt(e.target.value)]});        
+    //     setError(validate( {...state, genresId:[e.target.value]}));         
+    //  }
 
-    // function handleSubmitGenre (e) {
-    //     e.preventDefault();
-    //     getSelectValues(e.target);
+    // function handleSelectPlatform (e) {
+    //     setState( {...state, platforms:[e.target.value]});        
+    //     setError(validate( {...state, platforms:[e.target.value]}));   
     // }
-
-    // function getSelectValues(select) {
-    //     var result = [];
-    //     var options = select && select.options;
-    //     var opt;
-      
-    //     for (var i=0, iLen=options.length; i<iLen; i++) {
-    //       opt = options[i];
-      
-    //       if (opt.selected) {
-    //         result.push(opt.value || opt.text);
-    //       }
-    //     }
-    //     return result;
-    //   }
-
-
-
-
-    function handleSelectPlatform (e) {
-        setState( {...state, platforms:[e.target.value]});        
-        setError(validate( {...state, platforms:[e.target.value]}));   
-    }
 
 
     function handleSubmit (e){
@@ -204,18 +166,20 @@ export default function AddVideogame (){
                     <label>Rating</label>
                     <input type={'number'} name="rating" value={state.rating} onChange={(e) => handleChange(e)}></input>
                     {error.rating && (
-                        <p>{error.rating}</p>
+                        <p className= {style.error}>{error.rating}</p>
                     )}
                 </div>
                 <div>
                     <label>Imagen</label>
                     <input type={'text'} name="image" value={state.image} onChange={(e) => handleChange(e)}></input>
+                    {error.image && (
+                        <p className= {style.error}>{error.image}</p>
+                    )}
                 </div>
                 <div>
-                    <label>Género </label>                    
+                    <label>Género <span style={{fontSize:"10px"}}>(Máximo 3)</span></label>                    
                     
-                    <select multiple={true} value={state.genresId} className= {style.selectGandP} onChange={(e) => showSelectedGenres(e)}>
-                    {/* <select value={state.genresId} onChange={(e) => handleSelectGenre(e)}> */}
+                    <select multiple={true} value={state.genresId} className= {style.selectGandP} onChange={(e) => handleSelectGenre(e)}>                   
                         <option disabled="disabled">Seleccionar género</option>
                         {genres.map(genreObject => {
                             return (
@@ -224,18 +188,13 @@ export default function AddVideogame (){
                             </option>)
                             })
                         }                
-                    </select>
-                    
-
-                    {/* <input type={'submit'} value={'Seleccionar'} onSubmit={(e) => handleSubmitGenre(e)}/>           */}
-                    
-
+                    </select>                   
                     {error.genresId && (
                         <p className= {style.error}>{error.genresId}</p>
                     )}
                 </div>
                 <div>
-                    <label>Plataforma</label>
+                    <label>Plataforma <span style={{fontSize:"10px"}}>(Máximo 4)</span></label>
                     <select multiple={true} value={state.platforms} className= {style.selectGandP} onChange={(e) => handleSelectPlatform(e)}>                    
                         <option disabled="disabled">Seleccionar plataforma</option>
                         {platforms.map(platform => {

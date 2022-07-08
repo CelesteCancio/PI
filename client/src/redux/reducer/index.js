@@ -54,7 +54,7 @@ export default function rootReducer (state = initialState, action){
             return {
                 ...state,
                 platforms: action.payload.sort(function(a,b){return (
-                    a.name<b.name ? -1 : (a.name>b.name) ? 1 : 0
+                    a<b ? -1 : (a>b) ? 1 : 0
                     )}),
                 error:""
             }            
