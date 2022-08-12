@@ -43,9 +43,10 @@ router.post('/', async (req,res) => {
    
     try {
         const addedVideogame = await addVideogame({...req.body});  
-        //console.log(addedVideogame);        
+        console.log(addedVideogame);        
         return res.send("Videojuego agregado correctamente");
     } catch (error) {
+        console.log(error);
         return res.send(error);
     }
 });

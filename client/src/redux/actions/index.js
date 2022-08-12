@@ -25,7 +25,7 @@ export function addVideogame (videogame){
     //return {type: ADD_VIDEOGAME, payload: videogame};
     console.log(videogame)
     return function (dispatch){
-        return axios.post('http://localhost:3001/api/videogames',videogame)
+        return axios.post('/api/videogames',videogame)
         // .then((videogameResponse) => {
         //     dispatch({
         //         type: ADD_VIDEOGAME,
@@ -46,7 +46,7 @@ export function addVideogame (videogame){
 
 export function fetchVideogames (){
     // return function (dispatch){
-    //     return axios.get('http://localhost:3001/api/videogames')
+    //     return axios.get('/api/videogames')
     //     .then((videogames) => {
     //         dispatch({
     //             type: FETCH_VIDEOGAMES,
@@ -65,7 +65,7 @@ export function fetchVideogames (){
         
         
             try {
-                const videogames = await axios.get('http://localhost:3001/api/videogames');
+                const videogames = await axios.get('/api/videogames');
                 return (
                 dispatch({
                     type: FETCH_VIDEOGAMES,
@@ -84,7 +84,7 @@ export function fetchVideogames (){
 
 export function searchVideogames (name){
     return function (dispatch){
-        return axios.get(`http://localhost:3001/api/videogames?name=${name}`)
+        return axios.get(`/api/videogames?name=${name}`)
         .then((videogames) => {
             dispatch({
                 type: SEARCH_VIDEOGAMES,
@@ -102,7 +102,7 @@ export function searchVideogames (name){
 
 export function getVideogameDetail (id){
     return function (dispatch){
-        return fetch (`http://localhost:3001/api/videogame/${id}`)
+        return fetch (`/api/videogame/${id}`)
         .then(videogame => videogame.json())
         .then(videogameDetail => {
             return dispatch ({
@@ -122,7 +122,7 @@ export function getVideogameDetail (id){
 export function getGenres (){
     return function (dispatch){
         console.log(`en get genres`);
-        return axios.get(`http://localhost:3001/api/genres/`)
+        return axios.get(`/api/genres/`)
         .then(genres => {
             dispatch({
                 type: GET_GENRES,
@@ -138,7 +138,7 @@ export function getGenres (){
 export function getPlatforms (){
     return function (dispatch){
         console.log(`en get Platforms`);
-        return axios.get(`http://localhost:3001/api/videogames/platforms`)
+        return axios.get(`/api/videogames/platforms`)
         .then(platforms => {
             dispatch({
                 type: GET_PLATFORMS,
@@ -161,7 +161,7 @@ export function filterByGenre (genre){
 export function filterByOrigin (origin){
     if(origin === "API"){
         return function (dispatch){
-            return axios.get('http://localhost:3001/api/videogames/fromAPI')
+            return axios.get('/api/videogames/fromAPI')
             .then((videogames) => {
                 dispatch({
                     type: FILTER_BY_API,
@@ -175,7 +175,7 @@ export function filterByOrigin (origin){
     }
     else{
         return function (dispatch){
-            return axios.get('http://localhost:3001/api/videogames/fromDB')
+            return axios.get('/api/videogames/fromDB')
             .then((videogames) => {
                 dispatch({
                     type: FILTER_BY_DB,
