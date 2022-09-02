@@ -1,3 +1,5 @@
-Individual Project - Henry Videogames
+Final individual project - HENRY Bootcamp.
 
-Web app: JavaScript, React-Redux, NodeJS, ExpressJS, PostgreSQL y Sequelize. API.
+Videogames web app: 
+  Front end: JavaScript, ReactJS, Redux, HTML, CSS
+  Back end: NodeJS, ExpressJS, PostgreSQL and Sequelize. External REST API.
